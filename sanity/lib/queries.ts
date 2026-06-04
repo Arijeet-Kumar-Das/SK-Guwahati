@@ -25,3 +25,25 @@ export const FAQS_QUERY = `
 export const AREAS_QUERY = `
   *[_type == "area"] | order(_createdAt asc)
 `;
+export const FLEET_QUERY = `
+  *[_type == "fleet"] | order(_createdAt asc){
+    _id,
+    name,
+    capacity,
+    description,
+    image
+  }
+`;
+
+export const CUSTOMERS_QUERY = `
+  *[_type == "customer"] | order(_createdAt asc){
+    _id,
+    name,
+    location,
+    logo
+  }
+`;
+
+export const COMPANY_OVERVIEW_QUERY = `
+  *[_type == "companyOverview"][0]
+`;

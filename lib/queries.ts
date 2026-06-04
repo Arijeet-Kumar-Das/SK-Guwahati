@@ -13,3 +13,7 @@ export const FAQS_QUERY = `
 export const AREAS_QUERY = `
   *[_type == "area"] | order(_createdAt asc)
 `;
+
+export const WHY_CHOOSE_US_QUERY = `
+  *[_type == "whyChooseUs"] | order(_createdAt asc)
+`;

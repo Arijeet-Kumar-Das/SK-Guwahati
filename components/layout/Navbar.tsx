@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Phone, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -43,16 +44,15 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div
-              className={`flex items-center justify-center w-10 h-10 rounded-xl font-extrabold text-sm transition-colors duration-300 ${
-                scrolled
-                  ? "bg-navy-900 text-white"
-                  : "bg-white/15 text-white backdrop-blur-sm"
-              }`}
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              SK
-            </div>
+            <div className="relative w-12 h-12">
+  <Image
+    src="/images/logo.png"
+    alt="S.K Enterprise Logo"
+    fill
+    className="object-contain"
+    priority
+  />
+</div>
             <div>
               <div
                 className={`text-lg font-bold tracking-tight transition-colors duration-300 ${

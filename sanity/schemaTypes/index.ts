@@ -5,6 +5,10 @@ import { service } from "./service";
 import { testimonial } from "./testimonial";
 import { faq } from "./faq";
 import { area } from "./area";
+import { whyChooseUs } from "./whyChooseUs";
+import { fleet } from "./fleet";
+import { customer } from "./customer";
+import { companyOverview } from "./companyOverview";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -13,5 +17,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     testimonial,
     faq,
     area,
+    whyChooseUs,
+    fleet,
+    customer,
+    companyOverview,
   ],
 };

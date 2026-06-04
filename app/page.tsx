@@ -10,9 +10,14 @@ import ContactCTA from "@/components/sections/ContactCTA";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/layout/Footer";
 
+
 import { getSiteSettings } from "@/lib/sanity";
-import { getServices, getTestimonials, getFaqs, getAreas } from "@/lib/cms";
+import { getServices, getTestimonials, getFaqs, getAreas, getWhyChooseUs, getFleet, getCustomers, getCompanyOverview } from "@/lib/cms";
 import { SITE_URL } from "@/lib/seo";
+import Fleet from "@/components/sections/Fleet";
+import TrustedCustomers from "@/components/sections/TrustedCustomers";
+import CompanyOverview from "@/components/sections/CompanyOverview";
+
 
 /**
  * Homepage metadata — overrides root layout defaults.
@@ -39,6 +44,10 @@ export default async function Home() {
   const testimonials = await getTestimonials();
   const faqs = await getFaqs();
   const areas = await getAreas();
+  const whyChooseUs = await getWhyChooseUs();
+  const fleet = await getFleet();
+  const customers = await getCustomers();
+  const companyOverview = await getCompanyOverview();
 
   return (
     <>
@@ -46,7 +55,10 @@ export default async function Home() {
       <main id="main-content">
         <Hero siteSettings={siteSettings} />
         <Services services={services} />
-        <WhyChooseUs />
+        <CompanyOverview overview={companyOverview} />
+        <Fleet items={fleet} />
+        <WhyChooseUs items={whyChooseUs} />
+        <TrustedCustomers customers={customers} />
         <Testimonials testimonials={testimonials} />
         <FAQ faqs={faqs} />
         <Areas areas={areas} />
