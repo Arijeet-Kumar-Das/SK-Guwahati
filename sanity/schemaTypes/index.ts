@@ -9,6 +9,7 @@ import { whyChooseUs } from "./whyChooseUs";
 import { fleet } from "./fleet";
 import { customer } from "./customer";
 import { companyOverview } from "./companyOverview";
+import { gallery } from "./gallery";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -21,5 +22,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     fleet,
     customer,
     companyOverview,
+    gallery,
   ],
 };

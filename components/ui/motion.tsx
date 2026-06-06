@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import React from "react";
+import { motion, useInView, type Variants } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
 
 /* ------------------------------------------------------------------ */
 /*  Shared animation variants                                          */
@@ -155,5 +155,92 @@ export function StaggerItem({ children, className }: StaggerItemProps) {
     <motion.div variants={staggerItemVariants} className={className}>
       {children}
     </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SlideIn — entrance from left or right                              */
+/* ------------------------------------------------------------------ */
+
+interface SlideInProps {
+  children: React.ReactNode;
+  direction?: "left" | "right";
+  delay?: number;
+  className?: string;
+}
+
+export function SlideIn({
+  children,
+  direction = "left",
+  delay = 0,
+  className,
+}: SlideInProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: direction === "left" ? -48 : 48 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  CountUp — animated number counter                                  */
+/* ------------------------------------------------------------------ */
+
+interface CountUpProps {
+  end: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+  className?: string;
+}
+
+export function CountUp({
+  end,
+  suffix = "",
+  prefix = "",
+  duration = 2,
+  className,
+}: CountUpProps) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime: number | null = null;
+    let frame: number;
+
+    const animate = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+      const progress = Math.min(
+        (timestamp - startTime) / (duration * 1000),
+        1
+      );
+      // easeOutCubic for smooth deceleration
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * end));
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(animate);
+      }
+    };
+
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [isInView, end, duration]);
+
+  return (
+    <span ref={ref} className={className}>
+      {prefix}
+      {count.toLocaleString("en-IN")}
+      {suffix}
+    </span>
   );
 }

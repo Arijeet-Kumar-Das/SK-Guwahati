@@ -7,9 +7,13 @@ import { SITE_URL } from "@/lib/seo";
  * Why: Tells search engines about all indexable pages, their update frequency,
  * and relative importance. Critical for crawl budget efficiency.
  *
- * The homepage gets priority 1.0 (highest) because it's the primary landing page
- * for all local search queries. Sub-pages get lower priority since they're
- * currently placeholder pages.
+ * Priority rationale:
+ * - Homepage (1.0) — primary landing page for all local search queries
+ * - Services (0.9) — strongest commercial intent, lists all service offerings
+ * - Contact (0.8) — high conversion page with booking form
+ * - About (0.7) — builds E-E-A-T trust signals
+ * - Fleet (0.7) — showcases equipment, builds credibility
+ * - Gallery (0.6) — supporting content, lower search intent
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -23,10 +27,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/services`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.9,
     },
     {
       url: `${SITE_URL}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/fleet`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/gallery`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
@@ -35,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/contact`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     },
   ];
 }

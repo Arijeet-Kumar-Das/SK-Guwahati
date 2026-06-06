@@ -8,6 +8,10 @@ import {
 } from "@/components/ui/accordion";
 import { FadeUp } from "@/components/ui/motion";
 
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
 interface FAQ {
   _id: string;
   question: string;
@@ -18,24 +22,31 @@ interface FAQProps {
   faqs: FAQ[];
 }
 
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
 export default function FAQ({ faqs }: FAQProps) {
   return (
-    <section id="faq" aria-label="Frequently Asked Questions" className="py-24 lg:py-32 bg-white">
-      <div className="max-w-3xl mx-auto px-6 lg:px-8">
+    <section
+      id="faq"
+      aria-label="Frequently Asked Questions"
+      className="py-16 lg:py-24 bg-slate-50"
+    >
+      <div className="section-container">
         {/* Section header */}
         <FadeUp className="text-center mb-14">
           <p className="section-label">FAQ</p>
-          <h2 className="section-title text-navy-900">
-            Frequently Asked Questions
-          </h2>
+          <h2 className="section-title">Frequently Asked Questions</h2>
           <p className="section-subtitle mx-auto">
-            Common questions about our septic tank cleaning services.
+            Common questions about our septic tank cleaning services in
+            Guwahati.
           </p>
         </FadeUp>
 
         {/* Accordion */}
         <FadeUp delay={0.1}>
-          <div className="bg-slate-50 rounded-2xl ring-1 ring-slate-200/60 p-6 md:p-8">
+          <div className="max-w-3xl mx-auto bg-white rounded-3xl p-6 md:p-8 shadow-sm ring-1 ring-slate-200/60">
             <Accordion type="single" collapsible className="space-y-1">
               {faqs.map((faq) => (
                 <AccordionItem

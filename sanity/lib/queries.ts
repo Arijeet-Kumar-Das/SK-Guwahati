@@ -47,3 +47,12 @@ export const CUSTOMERS_QUERY = `
 export const COMPANY_OVERVIEW_QUERY = `
   *[_type == "companyOverview"][0]
 `;
+
+export const GALLERY_QUERY = `
+  *[_type == "gallery"] | order(_createdAt desc){
+    _id,
+    title,
+    orientation,
+    image
+  }
+`;

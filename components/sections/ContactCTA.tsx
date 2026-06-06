@@ -1,6 +1,11 @@
 "use client";
 
-import { Phone, MessageCircle, Clock, CheckCircle2 } from "lucide-react";
+import {
+  Phone,
+  MessageCircle,
+  Clock,
+  CheckCircle2,
+} from "lucide-react";
 import { FadeUp } from "@/components/ui/motion";
 
 interface ContactCTAProps {
@@ -15,10 +20,18 @@ export default function ContactCTA({ siteSettings }: ContactCTAProps) {
   const whatsapp = siteSettings?.whatsapp || "919864074129";
 
   return (
-    <section aria-label="Call to Action" className="py-24 lg:py-28 relative overflow-hidden">
+    <section
+      aria-label="Call to Action"
+      className="py-24 lg:py-28 relative overflow-hidden"
+    >
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-800 to-navy-900" />
-      <div className="absolute inset-0">
+
+      {/* Industrial grid overlay */}
+      <div className="absolute inset-0 industrial-grid" />
+
+      {/* Decorative elements */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-brand-green-600/8" />
         <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-navy-600/20" />
       </div>
@@ -33,8 +46,8 @@ export default function ContactCTA({ siteSettings }: ContactCTAProps) {
           </h2>
 
           <p className="text-lg text-navy-200 mt-5 max-w-xl mx-auto">
-            Contact our team now for fast, professional and hygienic service
-            anywhere in Guwahati.
+            Contact our team now for fast, professional and hygienic
+            service anywhere in Guwahati.
           </p>
 
           {/* Trust badges */}
@@ -44,7 +57,10 @@ export default function ContactCTA({ siteSettings }: ContactCTAProps) {
               <span>30-Minute Response</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 size={16} className="text-brand-green-400" />
+              <CheckCircle2
+                size={16}
+                className="text-brand-green-400"
+              />
               <span>No Hidden Charges</span>
             </div>
           </div>
@@ -66,7 +82,7 @@ export default function ContactCTA({ siteSettings }: ContactCTAProps) {
               href={`https://wa.me/${whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-white px-8 py-4 rounded-xl font-semibold text-base transition-all duration-200"
+              className="group inline-flex items-center gap-2.5 glass-card bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-white px-8 py-4 rounded-xl font-semibold text-base transition-all duration-200"
             >
               <MessageCircle
                 size={18}
