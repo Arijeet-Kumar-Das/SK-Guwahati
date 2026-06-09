@@ -29,8 +29,6 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
       googleMapsUrl,
       heroTitle,
       heroDescription
-    }`,
-    {},
-    { next: { revalidate: 3600 } }
+    }`
   );
 });

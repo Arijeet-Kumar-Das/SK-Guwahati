@@ -6,13 +6,6 @@ import Footer from "@/components/layout/Footer";
 import ChatBot from "@/components/layout/ChatBot";
 
 /**
- * Revalidate all (site) pages every hour via ISR.
- * Sanity CDN is already fast, but this ensures Next.js caches
- * the rendered HTML and doesn't re-render on every request.
- */
-export const revalidate = 3600;
-
-/**
  * Site layout — wraps all public-facing pages with Navbar, Footer,
  * and ChatBot. Does NOT apply to /studio (Sanity CMS).
  */
