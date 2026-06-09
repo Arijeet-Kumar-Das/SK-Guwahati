@@ -5,6 +5,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ChatBot from "@/components/layout/ChatBot";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Site layout — wraps all public-facing pages with Navbar, Footer,
  * and ChatBot. Does NOT apply to /studio (Sanity CMS).
