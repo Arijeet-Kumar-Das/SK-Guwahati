@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  Phone,
-  MessageCircle,
-  Clock,
-  CheckCircle2,
-} from "lucide-react";
 import { FadeUp } from "@/components/ui/motion";
+import { CheckCircle2, Clock, MessageCircle, Phone } from "lucide-react";
 
 interface ContactCTAProps {
   siteSettings: {
@@ -22,59 +17,45 @@ export default function ContactCTA({ siteSettings }: ContactCTAProps) {
   return (
     <section
       aria-label="Call to Action"
-      className="py-24 lg:py-28 relative overflow-hidden"
+      className="relative overflow-hidden bg-navy-950 py-20 lg:py-24"
     >
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-800 to-navy-900" />
-
-      {/* Industrial grid overlay */}
       <div className="absolute inset-0 industrial-grid" />
-
-      {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-brand-green-600/8" />
-        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-navy-600/20" />
-      </div>
 
       <div className="section-container relative z-10 text-center">
         <FadeUp>
-          <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Need Septic Tank Cleaning Today?
-          </h2>
-
-          <p className="text-lg text-navy-200 mt-5 max-w-xl mx-auto">
-            Contact our team now for fast, professional and hygienic
-            service anywhere in Guwahati.
+          <p className="section-label justify-center text-brand-green-400">
+            Request Service
           </p>
 
-          {/* Trust badges */}
-          <div className="flex flex-wrap justify-center gap-6 mt-8 text-sm text-navy-300">
+          <h2
+            className="mx-auto mt-4 max-w-3xl text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            Need septic tank or drain cleaning today?
+          </h2>
+
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-navy-200 sm:text-lg">
+            Contact the S.K Enterprise operations team for fast scheduling,
+            clear coordination, and professional mechanized service in Guwahati.
+          </p>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-5 text-sm font-semibold text-navy-200">
             <div className="flex items-center gap-2">
               <Clock size={16} className="text-brand-green-400" />
-              <span>30-Minute Response</span>
+              <span>Prompt response</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2
-                size={16}
-                className="text-brand-green-400"
-              />
-              <span>No Hidden Charges</span>
+              <CheckCircle2 size={16} className="text-brand-green-400" />
+              <span>Transparent service coordination</span>
             </div>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mt-10">
+          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
             <a
               href={`tel:${phone}`}
-              className="group inline-flex items-center gap-2.5 bg-brand-green-600 hover:bg-brand-green-500 text-white px-8 py-4 rounded-xl font-semibold text-base transition-all duration-200 shadow-lg shadow-brand-green-600/25 hover:shadow-brand-green-500/30"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-lg bg-brand-green-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-brand-green-600/20 transition-all duration-200 hover:bg-brand-green-700 hover:shadow-brand-green-600/25"
             >
-              <Phone
-                size={18}
-                className="transition-transform group-hover:scale-110"
-              />
+              <Phone size={18} className="transition-transform group-hover:scale-105" />
               Call Now
             </a>
 
@@ -82,11 +63,11 @@ export default function ContactCTA({ siteSettings }: ContactCTAProps) {
               href={`https://wa.me/${whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 glass-card bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-white px-8 py-4 rounded-xl font-semibold text-base transition-all duration-200"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-lg border border-white/15 bg-white/10 px-8 py-4 text-base font-bold text-white transition-colors duration-200 hover:bg-white/15"
             >
               <MessageCircle
                 size={18}
-                className="transition-transform group-hover:scale-110"
+                className="transition-transform group-hover:scale-105"
               />
               WhatsApp
             </a>

@@ -8,12 +8,12 @@ import { SITE_URL } from "@/lib/seo";
  * and relative importance. Critical for crawl budget efficiency.
  *
  * Priority rationale:
- * - Homepage (1.0) — primary landing page for all local search queries
- * - Services (0.9) — strongest commercial intent, lists all service offerings
- * - Contact (0.8) — high conversion page with booking form
- * - About (0.7) — builds E-E-A-T trust signals
- * - Fleet (0.7) — showcases equipment, builds credibility
- * - Gallery (0.6) — supporting content, lower search intent
+ * - Homepage (1.0) - primary landing page for all local search queries
+ * - Services (0.9) - strongest commercial intent, lists all service offerings
+ * - Contact (0.8) - high conversion page with booking form
+ * - About (0.7) - builds E-E-A-T trust signals
+ * - Fleet (0.7) - showcases equipment, builds credibility
+ * - Gallery (0.6) - supporting content, lower search intent
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

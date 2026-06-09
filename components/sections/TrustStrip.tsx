@@ -1,35 +1,29 @@
 "use client";
 
-import {
-  ShieldCheck,
-  Cog,
-  Leaf,
-  HardHat,
-  Clock,
-} from "lucide-react";
 import { StaggerContainer, StaggerItem } from "@/components/ui/motion";
+import { Clock, Cog, HardHat, Leaf, ShieldCheck } from "lucide-react";
 
 const trustPoints = [
-  { icon: ShieldCheck, text: "GMC Compliant" },
-  { icon: Cog, text: "Fully Mechanized" },
-  { icon: Leaf, text: "NGT Guidelines" },
-  { icon: HardHat, text: "Safety Standards" },
-  { icon: Clock, text: "24/7 Operations" },
+  { icon: ShieldCheck, text: "GMC compliant" },
+  { icon: Cog, text: "Fully mechanized" },
+  { icon: Leaf, text: "NGT aligned" },
+  { icon: HardHat, text: "Safety standards" },
+  { icon: Clock, text: "24/7 operations" },
 ];
 
 export default function TrustStrip() {
   return (
-    <section className="relative bg-navy-900 border-t border-white/[0.04] border-b border-b-white/[0.04]">
+    <section className="relative border-y border-white/10 bg-navy-900">
       <div className="section-container py-5 lg:py-6">
-        <StaggerContainer className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 lg:gap-x-12">
+        <StaggerContainer className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 lg:gap-x-10">
           {trustPoints.map((point) => (
             <StaggerItem key={point.text}>
               <div className="flex items-center gap-2.5 text-sm">
                 <point.icon
                   size={16}
-                  className="text-brand-green-400 flex-shrink-0"
+                  className="shrink-0 text-brand-green-400"
                 />
-                <span className="text-navy-200 font-medium whitespace-nowrap">
+                <span className="whitespace-nowrap font-semibold text-navy-100">
                   {point.text}
                 </span>
               </div>

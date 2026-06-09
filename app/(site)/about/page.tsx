@@ -23,14 +23,14 @@ import ContactCTA from "@/components/sections/ContactCTA";
  * - Unique description different from homepage to avoid cannibalization
  */
 export const metadata: Metadata = {
-  title: "About Us — S.K Enterprise Septic Tank Services",
+  title: "About Us - S.K Enterprise Septic Tank Services",
   description:
     "Learn about S.K Enterprise, Guwahati's trusted septic tank cleaning company. Established with a mission to provide fast, hygienic, and affordable sanitation services across Assam.",
   alternates: {
     canonical: `${SITE_URL}/about`,
   },
   openGraph: {
-    title: "About S.K Enterprise — Septic Tank Services in Guwahati",
+    title: "About S.K Enterprise - Septic Tank Services in Guwahati",
     description:
       "Guwahati's trusted septic tank cleaning company. Modern equipment, trained technicians, and 500+ satisfied customers.",
     url: `${SITE_URL}/about`,

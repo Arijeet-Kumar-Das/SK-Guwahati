@@ -8,14 +8,14 @@ import ContactCTA from "@/components/sections/ContactCTA";
 import HowItWorks from "./HowItWorks";
 
 export const metadata: Metadata = {
-  title: "Our Services — Septic Tank & Drain Cleaning in Guwahati",
+  title: "Our Services - Septic Tank & Drain Cleaning in Guwahati",
   description:
     "S.K Enterprise offers septic tank cleaning, drain cleaning, sewer cleaning, and emergency sanitation services in Guwahati, Assam. Modern equipment, trained technicians, 24/7 available. Call 09864074129.",
   alternates: {
     canonical: `${SITE_URL}/services`,
   },
   openGraph: {
-    title: "Septic Tank & Drain Cleaning Services — S.K Enterprise Guwahati",
+    title: "Septic Tank & Drain Cleaning Services - S.K Enterprise Guwahati",
     description:
       "Full range of septic tank cleaning, drain unblocking, and sewer maintenance services across Guwahati. Fast response, affordable pricing.",
     url: `${SITE_URL}/services`,

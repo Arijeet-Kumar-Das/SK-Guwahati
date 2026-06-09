@@ -1,6 +1,11 @@
 "use client";
 
-import { motion, useInView, type Variants } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 
 /* ------------------------------------------------------------------ */
@@ -67,6 +72,12 @@ export function FadeUp({
   delay = 0,
   className,
 }: FadeUpProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       variants={fadeUpVariants}
@@ -88,6 +99,12 @@ interface FadeInProps {
 }
 
 export function FadeIn({ children, delay = 0, className }: FadeInProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       variants={fadeInVariants}
@@ -109,6 +126,12 @@ interface ScaleInProps {
 }
 
 export function ScaleIn({ children, delay = 0, className }: ScaleInProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       variants={scaleInVariants}
@@ -132,6 +155,12 @@ export function StaggerContainer({
   children,
   className,
 }: StaggerContainerProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       variants={staggerContainerVariants}
@@ -151,6 +180,12 @@ interface StaggerItemProps {
 }
 
 export function StaggerItem({ children, className }: StaggerItemProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div variants={staggerItemVariants} className={className}>
       {children}
@@ -159,7 +194,7 @@ export function StaggerItem({ children, className }: StaggerItemProps) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  SlideIn — entrance from left or right                              */
+/*  SlideIn - entrance from left or right                               */
 /* ------------------------------------------------------------------ */
 
 interface SlideInProps {
@@ -175,6 +210,12 @@ export function SlideIn({
   delay = 0,
   className,
 }: SlideInProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, x: direction === "left" ? -48 : 48 }}
@@ -189,7 +230,7 @@ export function SlideIn({
 }
 
 /* ------------------------------------------------------------------ */
-/*  CountUp — animated number counter                                  */
+/*  CountUp - animated number counter                                   */
 /* ------------------------------------------------------------------ */
 
 interface CountUpProps {
@@ -209,10 +250,11 @@ export function CountUp({
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const shouldReduceMotion = useReducedMotion();
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (shouldReduceMotion || !isInView) return;
 
     let startTime: number | null = null;
     let frame: number;
@@ -234,12 +276,12 @@ export function CountUp({
 
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, [isInView, end, duration]);
+  }, [isInView, end, duration, shouldReduceMotion]);
 
   return (
     <span ref={ref} className={className}>
       {prefix}
-      {count.toLocaleString("en-IN")}
+      {(shouldReduceMotion ? end : count).toLocaleString("en-IN")}
       {suffix}
     </span>
   );

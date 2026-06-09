@@ -20,12 +20,12 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "S.K Enterprise — Professional Septic Tank Cleaning in Guwahati | 24/7 Service",
-    template: "%s | S.K Enterprise — Guwahati",
+      "S.K Enterprise - Professional Septic Tank Cleaning in Guwahati | 24/7 Service",
+    template: "%s | S.K Enterprise - Guwahati",
   },
 
   description:
-    "Trusted septic tank cleaning, drain cleaning, and sewer services in Guwahati, Assam. 300000+ jobs completed, 4.8★ rated, 24/7 available. Fast response, modern equipment, affordable pricing. Call 09864074129.",
+    "Trusted septic tank cleaning, drain cleaning, and sewer services in Guwahati, Assam. 300000+ jobs completed, 4.8 star rated, 24/7 available. Fast response, modern equipment, affordable pricing. Call 09864074129.",
 
   keywords: TARGET_KEYWORDS as unknown as string[],
 
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: SITE_URL,
     siteName: BUSINESS.name,
-    title: "S.K Enterprise — Professional Septic Tank Cleaning in Guwahati",
+    title: "S.K Enterprise - Professional Septic Tank Cleaning in Guwahati",
     description:
       "Guwahati's most trusted septic tank cleaning service. Fast response, modern equipment, transparent pricing. 500+ satisfied customers. Available 24/7.",
     images: [
@@ -54,16 +54,16 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "S.K Enterprise — Septic Tank Cleaning Services in Guwahati",
+        alt: "S.K Enterprise - Septic Tank Cleaning Services in Guwahati",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "S.K Enterprise — Septic Tank Cleaning in Guwahati | 24/7",
+    title: "S.K Enterprise - Septic Tank Cleaning in Guwahati | 24/7",
     description:
-      "Professional septic tank cleaning across Guwahati. 300000+ jobs completed, 4.8★ rated. Call 09864074129 for fast service.",
+      "Professional septic tank cleaning across Guwahati. 300000+ jobs completed, 4.8 star rated. Call 09864074129 for fast service.",
     images: ["/og-image.png"],
   },
 
@@ -80,11 +80,6 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Root layout — provides fonts, metadata, and <html>/<body> wrapper ONLY.
- * Navbar/Footer/WhatsApp are in the (site) route group layout so they
- * don't appear on the Sanity Studio (/studio).
- */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -94,6 +89,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${plusJakarta.variable} antialiased scroll-smooth`}
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-screen flex flex-col bg-white text-slate-800">
         {children}

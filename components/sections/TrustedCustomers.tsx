@@ -1,20 +1,21 @@
 "use client";
 
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import { ShieldCheck } from "lucide-react";
 import {
+  CountUp,
   FadeUp,
   StaggerContainer,
   StaggerItem,
-  CountUp,
 } from "@/components/ui/motion";
+import { urlFor } from "@/sanity/lib/image";
+import type { SanityImageSource } from "@sanity/image-url";
+import { ShieldCheck } from "lucide-react";
+import Image from "next/image";
 
 interface Customer {
   _id: string;
   name: string;
   location: string;
-  logo?: any;
+  logo?: SanityImageSource;
 }
 
 interface TrustedCustomersProps {
@@ -26,90 +27,92 @@ export default function TrustedCustomers({ customers }: TrustedCustomersProps) {
     <section
       id="customers"
       aria-label="Trusted Customers"
-      className="py-24 lg:py-32 bg-slate-50"
+      className="bg-navy-50 py-20 lg:py-28"
     >
       <div className="section-container">
-        {/* Header */}
-        <FadeUp className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold mb-5">
-            <ShieldCheck className="w-4 h-4" />
-            Trusted Organizations
+        <FadeUp className="mx-auto mb-14 max-w-3xl text-center">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-brand-green-600/20 bg-white px-4 py-2 text-sm font-bold text-brand-green-700">
+            <ShieldCheck className="h-4 w-4" />
+            Trusted organizations
           </div>
 
-          <h2 className="section-title">Trusted By Leading Organizations</h2>
+          <h2 className="section-title">Trusted by Leading Organizations</h2>
 
           <p className="section-subtitle mx-auto">
-            Our professional septic tank and sewer cleaning services are trusted
-            by airports, hospitals, industries, government organizations and
-            major commercial establishments across Assam.
+            Airports, hospitals, industries, government organizations, and
+            commercial establishments rely on S.K Enterprise for clean,
+            dependable field execution.
           </p>
         </FadeUp>
 
-        {/* Logo Grid — static, no marquee */}
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <StaggerContainer className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {customers.map((customer) => (
             <StaggerItem key={customer._id}>
-              <div className="group bg-white rounded-2xl border border-slate-200 hover:border-brand-green-300 p-6 h-44 flex flex-col items-center justify-center text-center transition-all duration-300 card-hover">
-                {/* Logo */}
-                <div className="relative w-full h-20 mb-4 flex items-center justify-center">
+              <article className="enterprise-card card-hover flex h-44 flex-col items-center justify-center p-5 text-center">
+                <div className="relative mb-4 h-20 w-full">
                   {customer.logo && (
                     <Image
                       src={urlFor(customer.logo).width(400).url()}
                       alt={customer.name}
                       fill
-                      className="object-contain    transition-all duration-500"
+                      className="object-contain"
+                      sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   )}
                 </div>
 
-                {/* Company name */}
                 <h3
-                  className="text-sm font-bold text-slate-900 leading-tight"
+                  className="text-sm font-extrabold leading-tight text-navy-950"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {customer.name}
                 </h3>
 
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="mt-1 text-xs font-medium text-slate-500">
                   {customer.location}
                 </p>
-              </div>
+              </article>
             </StaggerItem>
           ))}
         </StaggerContainer>
 
-        {/* Stats bar */}
-        <FadeUp className="mt-20">
-          <div className="bg-navy-950 rounded-3xl p-8 lg:p-12">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
+        <FadeUp className="mt-14">
+          <div className="rounded-lg bg-navy-950 p-7 text-white lg:p-10">
+            <div className="grid gap-7 text-center md:grid-cols-3">
               <div>
                 <h3
-                  className="text-4xl font-bold text-brand-green-400 mb-2"
+                  className="text-4xl font-extrabold text-brand-green-400"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   <CountUp end={300000} suffix="+" />
                 </h3>
-                <p className="text-navy-300">Projects Completed</p>
+                <p className="mt-2 text-sm font-medium text-navy-300">
+                  Projects completed
+                </p>
               </div>
 
               <div>
                 <h3
-                  className="text-4xl font-bold text-brand-green-400 mb-2"
+                  className="text-4xl font-extrabold text-brand-green-400"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   <CountUp end={15} suffix="+" />
                 </h3>
-                <p className="text-navy-300">Areas Served</p>
+                <p className="mt-2 text-sm font-medium text-navy-300">
+                  Areas served
+                </p>
               </div>
 
               <div>
                 <h3
-                  className="text-4xl font-bold text-brand-green-400 mb-2"
+                  className="text-4xl font-extrabold text-brand-green-400"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   7 Days
                 </h3>
-                <p className="text-navy-300">Weekly Availability</p>
+                <p className="mt-2 text-sm font-medium text-navy-300">
+                  Weekly availability
+                </p>
               </div>
             </div>
           </div>

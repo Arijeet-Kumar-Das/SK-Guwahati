@@ -1,24 +1,22 @@
 "use client";
 
-import { useState, type FormEvent, type ChangeEvent } from "react";
+import { FadeUp, SlideIn } from "@/components/ui/motion";
 import {
-  MapPin,
-  Phone,
+  AlertCircle,
+  CheckCircle2,
   Clock,
   Loader2,
-  CheckCircle2,
-  AlertCircle,
+  MapPin,
+  MessageCircle,
+  Phone,
   Send,
 } from "lucide-react";
-import { FadeUp, SlideIn } from "@/components/ui/motion";
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
+import { useState, type ChangeEvent, type FormEvent } from "react";
 
 interface ContactProps {
   siteSettings: {
     phone: string;
+    whatsapp?: string;
     address: string;
     workingHours: string;
     googleMapsUrl: string;
@@ -49,18 +47,12 @@ interface ApiResponse {
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
-// ---------------------------------------------------------------------------
-// Validation
-// ---------------------------------------------------------------------------
-
 const PHONE_REGEX = /^(?:\+91|0)?[6-9]\d{9}$/;
 
 function validateForm(data: FormData): FormErrors {
   const errors: FormErrors = {};
 
-  if (!data.name.trim()) {
-    errors.name = "Name is required";
-  }
+  if (!data.name.trim()) errors.name = "Name is required";
 
   if (!data.phone.trim()) {
     errors.phone = "Phone number is required";
@@ -71,24 +63,12 @@ function validateForm(data: FormData): FormErrors {
     }
   }
 
-  if (!data.address.trim()) {
-    errors.address = "Address is required";
-  }
-
-  if (!data.service || data.service === "Select Service") {
-    errors.service = "Please select a service";
-  }
-
-  if (!data.message.trim()) {
-    errors.message = "Message is required";
-  }
+  if (!data.address.trim()) errors.address = "Address is required";
+  if (!data.service) errors.service = "Please select a service";
+  if (!data.message.trim()) errors.message = "Message is required";
 
   return errors;
 }
-
-// ---------------------------------------------------------------------------
-// Constants
-// ---------------------------------------------------------------------------
 
 const INITIAL_FORM: FormData = {
   name: "",
@@ -104,19 +84,15 @@ const SERVICES = [
   "Emergency Service",
 ] as const;
 
-// ---------------------------------------------------------------------------
-// Contact info items
-// ---------------------------------------------------------------------------
-
 const CONTACT_INFO = [
   {
     icon: MapPin,
-    label: "Visit Us",
+    label: "Office",
     key: "address" as const,
   },
   {
     icon: Phone,
-    label: "Call Us",
+    label: "Phone",
     key: "phone" as const,
   },
   {
@@ -126,21 +102,11 @@ const CONTACT_INFO = [
   },
 ];
 
-// ---------------------------------------------------------------------------
-// Shared input class builder
-// ---------------------------------------------------------------------------
-
 function inputClasses(hasError: boolean): string {
-  return `w-full bg-white/[0.06] border ${
-    hasError
-      ? "border-red-400/60 bg-red-500/10"
-      : "border-white/[0.08]"
-  } text-white placeholder-navy-400 rounded-xl p-4 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed`;
+  return `w-full rounded-lg border bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-slate-400 transition-all duration-200 focus:border-brand-green-600 focus:outline-none focus:ring-3 focus:ring-brand-green-600/15 disabled:cursor-not-allowed disabled:opacity-50 ${
+    hasError ? "border-red-400 bg-red-50/50" : "border-slate-300"
+  }`;
 }
-
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
 
 export default function Contact({ siteSettings }: ContactProps) {
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
@@ -148,15 +114,12 @@ export default function Contact({ siteSettings }: ContactProps) {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [statusMessage, setStatusMessage] = useState("");
 
-  // ---- Handlers ----
-
   function handleChange(
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Clear field error on change
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => {
         const next = { ...prev };
@@ -169,7 +132,6 @@ export default function Contact({ siteSettings }: ContactProps) {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // Client-side validation
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -193,7 +155,6 @@ export default function Contact({ siteSettings }: ContactProps) {
         setStatusMessage(result.message);
         setFormData(INITIAL_FORM);
 
-        // Auto-dismiss success after 6 seconds
         setTimeout(() => {
           setStatus("idle");
           setStatusMessage("");
@@ -202,7 +163,6 @@ export default function Contact({ siteSettings }: ContactProps) {
         setStatus("error");
         setStatusMessage(result.message);
 
-        // Map server-side field errors
         if (result.errors) {
           setErrors(result.errors as FormErrors);
         }
@@ -216,118 +176,141 @@ export default function Contact({ siteSettings }: ContactProps) {
   }
 
   const isSubmitting = status === "submitting";
-
-  // ---- Render ----
+  const whatsapp = siteSettings.whatsapp || "919864074129";
 
   return (
     <section
       id="contact"
       aria-label="Contact Us"
-      className="py-16 lg:py-24 bg-navy-950 relative overflow-hidden"
+      className="bg-white py-16 lg:py-24"
     >
-      {/* Industrial grid overlay */}
-      <div className="absolute inset-0 industrial-grid" />
-
-      {/* Decorative elements */}
-      <div className="absolute inset-0">
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-brand-green-600/5" />
-        <div className="absolute -bottom-48 -left-48 w-[600px] h-[600px] rounded-full bg-navy-800/30" />
-      </div>
-
-      <div className="section-container relative z-10">
-        {/* Section header */}
-        <FadeUp className="text-center mb-14">
-          <p className="section-label text-brand-green-400">Get In Touch</p>
-          <h2 className="section-title !text-white">Contact Us</h2>
-          <p className="section-subtitle !text-navy-300 mx-auto">
-            Ready to schedule a septic tank cleaning? Reach out to us or fill
-            in the form below.
+      <div className="section-container">
+        <FadeUp className="mx-auto mb-12 max-w-3xl text-center">
+          <p className="section-label justify-center">Get in Touch</p>
+          <h2 className="section-title">Book a Professional Cleaning Service</h2>
+          <p className="section-subtitle mx-auto">
+            Call, message, or send an enquiry. The operations team will confirm
+            service details and coordinate the right vehicle for your site.
           </p>
         </FadeUp>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* ---- LEFT COLUMN: Contact Info + Map ---- */}
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
           <SlideIn direction="left">
             <div className="space-y-5">
+              <div className="rounded-lg bg-navy-950 p-6 text-white lg:p-7">
+                <p className="section-label text-brand-green-400">
+                  Direct Support
+                </p>
+                <h3
+                  className="mt-4 text-2xl font-extrabold leading-tight"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  Fast response for scheduled and urgent sanitation work
+                </h3>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <a
+                    href={`tel:${siteSettings.phone}`}
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-green-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-green-700"
+                  >
+                    <Phone size={16} />
+                    Call Now
+                  </a>
+                  <a
+                    href={`https://wa.me/${whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/10 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-white/15"
+                  >
+                    <MessageCircle size={16} />
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+
               {CONTACT_INFO.map((item) => {
                 const Icon = item.icon;
                 return (
-                  <div
+                  <article
                     key={item.key}
-                    className="glass-card rounded-2xl p-6 flex items-start gap-5 transition-all duration-300 hover:bg-white/[0.08]"
+                    className="enterprise-card flex items-start gap-4 p-5"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-brand-green-600/15 flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 text-brand-green-400" />
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-green-600/10 text-brand-green-700">
+                      <Icon className="h-5 w-5" />
                     </div>
                     <div>
                       <h3
-                        className="text-base font-bold text-white mb-1"
+                        className="text-base font-extrabold text-navy-950"
                         style={{ fontFamily: "var(--font-heading)" }}
                       >
                         {item.label}
                       </h3>
-                      <p className="text-navy-300 text-sm leading-relaxed">
+                      <p className="mt-1 text-sm leading-6 text-slate-600">
                         {siteSettings[item.key]}
                       </p>
                     </div>
-                  </div>
+                  </article>
                 );
               })}
-            </div>
 
-            {/* Google Maps */}
-            <div className="mt-6 rounded-2xl overflow-hidden shadow-lg h-[350px] ring-1 ring-white/10">
-              <iframe
-                src={
-                  siteSettings.googleMapsUrl ||
-                  "https://maps.google.com/maps?q=Solapara%20Road%20Guwahati&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                }
-                width="100%"
-                height="100%"
-                loading="lazy"
-                allowFullScreen
-                title="S.K Enterprise location on Google Maps"
-                className="border-0"
-              />
+              <div className="h-[330px] overflow-hidden rounded-lg border border-slate-200 shadow-[0_14px_36px_rgba(15,23,42,0.08)]">
+                <iframe
+                  src={
+                    siteSettings.googleMapsUrl ||
+                    "https://maps.google.com/maps?q=Solapara%20Road%20Guwahati&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  }
+                  width="100%"
+                  height="100%"
+                  loading="lazy"
+                  allowFullScreen
+                  title="S.K Enterprise location on Google Maps"
+                  className="border-0"
+                />
+              </div>
             </div>
           </SlideIn>
 
-          {/* ---- RIGHT COLUMN: Request Service Form ---- */}
           <SlideIn direction="right" delay={0.15}>
-            <div className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 border border-white/[0.06]">
-              <h3
-                className="text-2xl font-bold text-white mb-2"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
-                Request Service
-              </h3>
-              <p className="text-navy-400 text-sm mb-8">
-                Fill out the form and we&apos;ll get back to you within 30
-                minutes.
-              </p>
+            <div className="enterprise-card p-6 lg:p-8">
+              <div className="mb-7">
+                <h3
+                  className="text-2xl font-extrabold text-navy-950"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  Request Service
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  Share your requirement and we will get back to you with the
+                  next step.
+                </p>
+              </div>
 
-              {/* ---- Status Toast ---- */}
               {status === "success" && (
-                <div className="mb-6 flex items-start gap-3 p-4 bg-brand-green-600/20 border border-brand-green-500/30 rounded-xl text-brand-green-300 animate-in fade-in slide-in-from-top-2">
-                  <CheckCircle2 className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <p className="text-sm font-medium">{statusMessage}</p>
+                <div className="mb-6 flex items-start gap-3 rounded-lg border border-brand-green-600/20 bg-brand-green-600/10 p-4 text-brand-green-700">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+                  <p className="text-sm font-semibold">{statusMessage}</p>
                 </div>
               )}
 
               {status === "error" && (
-                <div className="mb-6 flex items-start gap-3 p-4 bg-red-500/20 border border-red-500/30 rounded-xl text-red-300 animate-in fade-in slide-in-from-top-2">
-                  <AlertCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <p className="text-sm font-medium">{statusMessage}</p>
+                <div className="mb-6 flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+                  <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+                  <p className="text-sm font-semibold">{statusMessage}</p>
                 </div>
               )}
 
               <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-                {/* Name */}
                 <div>
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-sm font-bold text-navy-950"
+                  >
+                    Name
+                  </label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
-                    placeholder="Your Name"
+                    placeholder="Your name"
                     value={formData.name}
                     onChange={handleChange}
                     disabled={isSubmitting}
@@ -336,41 +319,91 @@ export default function Contact({ siteSettings }: ContactProps) {
                     aria-describedby={errors.name ? "name-error" : undefined}
                   />
                   {errors.name && (
-                    <p id="name-error" className="mt-1.5 text-sm text-red-400">
+                    <p id="name-error" className="mt-1.5 text-sm text-red-600">
                       {errors.name}
                     </p>
                   )}
                 </div>
 
-                {/* Phone */}
-                <div>
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    className={inputClasses(!!errors.phone)}
-                    aria-invalid={!!errors.phone}
-                    aria-describedby={errors.phone ? "phone-error" : undefined}
-                  />
-                  {errors.phone && (
-                    <p
-                      id="phone-error"
-                      className="mt-1.5 text-sm text-red-400"
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="mb-2 block text-sm font-bold text-navy-950"
                     >
-                      {errors.phone}
-                    </p>
-                  )}
+                      Phone
+                    </label>
+                    <input
+                      id="phone"
+                      type="tel"
+                      name="phone"
+                      placeholder="Phone number"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className={inputClasses(!!errors.phone)}
+                      aria-invalid={!!errors.phone}
+                      aria-describedby={errors.phone ? "phone-error" : undefined}
+                    />
+                    {errors.phone && (
+                      <p
+                        id="phone-error"
+                        className="mt-1.5 text-sm text-red-600"
+                      >
+                        {errors.phone}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="service"
+                      className="mb-2 block text-sm font-bold text-navy-950"
+                    >
+                      Service
+                    </label>
+                    <select
+                      id="service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className={inputClasses(!!errors.service)}
+                      aria-invalid={!!errors.service}
+                      aria-describedby={
+                        errors.service ? "service-error" : undefined
+                      }
+                    >
+                      <option value="">Select service</option>
+                      {SERVICES.map((service) => (
+                        <option key={service} value={service}>
+                          {service}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.service && (
+                      <p
+                        id="service-error"
+                        className="mt-1.5 text-sm text-red-600"
+                      >
+                        {errors.service}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
-                {/* Address */}
                 <div>
+                  <label
+                    htmlFor="address"
+                    className="mb-2 block text-sm font-bold text-navy-950"
+                  >
+                    Address
+                  </label>
                   <input
+                    id="address"
                     type="text"
                     name="address"
-                    placeholder="Your Address"
+                    placeholder="Service address"
                     value={formData.address}
                     onChange={handleChange}
                     disabled={isSubmitting}
@@ -383,55 +416,25 @@ export default function Contact({ siteSettings }: ContactProps) {
                   {errors.address && (
                     <p
                       id="address-error"
-                      className="mt-1.5 text-sm text-red-400"
+                      className="mt-1.5 text-sm text-red-600"
                     >
                       {errors.address}
                     </p>
                   )}
                 </div>
 
-                {/* Service */}
                 <div>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    className={inputClasses(!!errors.service)}
-                    aria-invalid={!!errors.service}
-                    aria-describedby={
-                      errors.service ? "service-error" : undefined
-                    }
+                  <label
+                    htmlFor="message"
+                    className="mb-2 block text-sm font-bold text-navy-950"
                   >
-                    <option value="" className="bg-navy-900 text-navy-400">
-                      Select Service
-                    </option>
-                    {SERVICES.map((service) => (
-                      <option
-                        key={service}
-                        value={service}
-                        className="bg-navy-900 text-white"
-                      >
-                        {service}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.service && (
-                    <p
-                      id="service-error"
-                      className="mt-1.5 text-sm text-red-400"
-                    >
-                      {errors.service}
-                    </p>
-                  )}
-                </div>
-
-                {/* Message */}
-                <div>
+                    Requirement
+                  </label>
                   <textarea
+                    id="message"
                     name="message"
                     rows={4}
-                    placeholder="Describe your requirement..."
+                    placeholder="Describe your requirement"
                     value={formData.message}
                     onChange={handleChange}
                     disabled={isSubmitting}
@@ -444,27 +447,26 @@ export default function Contact({ siteSettings }: ContactProps) {
                   {errors.message && (
                     <p
                       id="message-error"
-                      className="mt-1.5 text-sm text-red-400"
+                      className="mt-1.5 text-sm text-red-600"
                     >
                       {errors.message}
                     </p>
                   )}
                 </div>
 
-                {/* Submit */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-brand-green-600 hover:bg-brand-green-700 text-white py-4 rounded-xl font-semibold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-brand-green-600/20 hover:shadow-brand-green-600/30"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand-green-600 px-6 py-4 text-base font-bold text-white shadow-lg shadow-brand-green-600/20 transition-all duration-200 hover:bg-brand-green-700 hover:shadow-brand-green-600/25 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Sending…
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      Sending
                     </>
                   ) : (
                     <>
-                      <Send className="w-4 h-4" />
+                      <Send className="h-4 w-4" />
                       Request Service
                     </>
                   )}

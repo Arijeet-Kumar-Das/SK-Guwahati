@@ -1,4 +1,11 @@
-import { Phone, MapPin, MessageCircle, ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  MapPin,
+  MessageCircle,
+  Phone,
+  ShieldCheck,
+} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 interface FooterProps {
@@ -22,93 +29,100 @@ const serviceLinks = [
   "Septic Tank Cleaning",
   "Drain Cleaning",
   "Sewer Cleaning",
-  "Emergency Service",
+  "Emergency Response",
 ];
 
 export default function Footer({ siteSettings }: FooterProps) {
   return (
-    <footer className="bg-navy-950 text-white relative">
-      {/* Top accent line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-brand-green-600/40 to-transparent" />
+    <footer className="relative bg-navy-950 text-white">
+      <div className="h-px bg-brand-green-600/60" />
 
-      {/* Pre-footer CTA */}
-      <div className="border-b border-white/[0.06]">
-        <div className="section-container py-12 lg:py-14">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div>
+      <div className="border-b border-white/10">
+        <div className="section-container py-10 lg:py-12">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <div className="mb-3 inline-flex items-center gap-2 text-sm font-semibold text-brand-green-400">
+                <ShieldCheck size={16} />
+                Professional mechanized sanitation support
+              </div>
               <h3
-                className="text-2xl lg:text-3xl font-bold tracking-tight"
+                className="text-2xl font-extrabold leading-tight text-white lg:text-3xl"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                Ready to Get Started?
+                Need a dependable septic or drain cleaning team?
               </h3>
-              <p className="text-navy-300 mt-2">
-                Contact us today for fast, professional septic tank cleaning.
+              <p className="mt-3 text-sm leading-6 text-navy-200 sm:text-base">
+                Call our Guwahati operations team for prompt scheduling,
+                transparent coordination, and clean mechanized execution.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
+
+            <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href={`tel:${siteSettings.phone}`}
-                className="inline-flex items-center gap-2 bg-brand-green-600 hover:bg-brand-green-700 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-green-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-green-700"
               >
                 <Phone size={16} />
                 Call Now
               </a>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 border border-white/10 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/10 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/15"
               >
                 Request Service
-                <ArrowRight size={15} />
+                <ArrowRight size={16} />
               </Link>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Main footer */}
-      <div className="section-container py-16 lg:py-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          {/* Brand column */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5">
-              <div
-                className="flex items-center justify-center w-10 h-10 rounded-xl bg-brand-green-600 text-white font-extrabold text-sm"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
-                SK
+      <div className="section-container py-14 lg:py-20">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.25fr_0.75fr_0.75fr_1fr] lg:gap-12">
+          <div>
+            <div className="mb-5 flex items-center gap-3">
+              <div className="relative h-11 w-11 overflow-hidden rounded-lg border border-white/10 bg-white">
+                <Image
+                  src="/images/logo.png"
+                  alt="S.K Enterprise Logo"
+                  fill
+                  className="object-contain p-1"
+                  sizes="44px"
+                />
               </div>
               <div>
                 <div
-                  className="text-lg font-bold tracking-tight"
+                  className="text-lg font-extrabold"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {siteSettings.companyName}
                 </div>
+                <p className="text-xs font-semibold uppercase text-navy-300">
+                  Guwahati sanitation services
+                </p>
               </div>
             </div>
-            <p className="text-navy-300 text-sm leading-relaxed">
-              Professional septic tank cleaning services across Guwahati with
-              modern equipment, trained technicians, and reliable 24/7 support.
+            <p className="max-w-sm text-sm leading-7 text-navy-300">
+              Mechanized septic tank cleaning, drain maintenance, sewer
+              cleaning, and waste management support for homes, institutions,
+              commercial sites, and industrial facilities.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4
-              className="font-bold text-xs uppercase tracking-[0.2em] text-navy-200 mb-6"
+              className="mb-5 text-sm font-bold uppercase text-white"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              Quick Links
+              Pages
             </h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-navy-400 hover:text-white text-sm transition-colors duration-200 inline-flex items-center gap-2 group"
+                    className="inline-flex text-sm font-medium text-navy-300 transition-colors hover:text-white"
                   >
-                    <span className="w-0 group-hover:w-3 h-px bg-brand-green-400 transition-all duration-200" />
                     {link.label}
                   </Link>
                 </li>
@@ -116,27 +130,25 @@ export default function Footer({ siteSettings }: FooterProps) {
             </ul>
           </div>
 
-          {/* Services */}
           <div>
             <h4
-              className="font-bold text-xs uppercase tracking-[0.2em] text-navy-200 mb-6"
+              className="mb-5 text-sm font-bold uppercase text-white"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Services
             </h4>
             <ul className="space-y-3">
               {serviceLinks.map((item) => (
-                <li key={item}>
-                  <span className="text-navy-400 text-sm">{item}</span>
+                <li key={item} className="text-sm font-medium text-navy-300">
+                  {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
             <h4
-              className="font-bold text-xs uppercase tracking-[0.2em] text-navy-200 mb-6"
+              className="mb-5 text-sm font-bold uppercase text-white"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Contact
@@ -144,48 +156,40 @@ export default function Footer({ siteSettings }: FooterProps) {
             <div className="space-y-4">
               <a
                 href={`tel:${siteSettings.phone}`}
-                className="flex gap-3 items-start text-navy-400 hover:text-white transition-colors duration-200 group"
+                className="flex items-start gap-3 text-navy-300 transition-colors hover:text-white"
               >
-                <Phone
-                  size={16}
-                  className="mt-0.5 flex-shrink-0 text-brand-green-400"
-                />
-                <span className="text-sm">{siteSettings.phone}</span>
+                <Phone size={17} className="mt-0.5 shrink-0 text-brand-green-400" />
+                <span className="text-sm font-medium">{siteSettings.phone}</span>
               </a>
-
               <a
                 href={`https://wa.me/${siteSettings.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex gap-3 items-start text-navy-400 hover:text-white transition-colors duration-200 group"
+                className="flex items-start gap-3 text-navy-300 transition-colors hover:text-white"
               >
                 <MessageCircle
-                  size={16}
-                  className="mt-0.5 flex-shrink-0 text-brand-green-400"
+                  size={17}
+                  className="mt-0.5 shrink-0 text-brand-green-400"
                 />
-                <span className="text-sm">WhatsApp</span>
+                <span className="text-sm font-medium">WhatsApp</span>
               </a>
-
-              <div className="flex gap-3 items-start text-navy-400">
+              <div className="flex items-start gap-3 text-navy-300">
                 <MapPin
-                  size={16}
-                  className="mt-0.5 flex-shrink-0 text-brand-green-400"
+                  size={17}
+                  className="mt-0.5 shrink-0 text-brand-green-400"
                 />
-                <span className="text-sm">{siteSettings.address}</span>
+                <span className="text-sm leading-6">{siteSettings.address}</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/[0.06] mt-14 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-navy-500 text-sm">
-            © {new Date().getFullYear()} {siteSettings.companyName}. All rights
-            reserved.
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-7 text-sm text-navy-400 md:flex-row md:items-center md:justify-between">
+          <p>
+            Copyright {new Date().getFullYear()} {siteSettings.companyName}.
+            All rights reserved.
           </p>
-          <p className="text-navy-600 text-xs">
-            Professional Septic Tank Services · Guwahati, Assam
-          </p>
+          <p>Professional septic tank services in Guwahati, Assam.</p>
         </div>
       </div>
     </footer>

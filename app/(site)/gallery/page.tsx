@@ -7,14 +7,14 @@ import Gallery from "@/components/sections/Gallery";
 import ContactCTA from "@/components/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Project Gallery — See Our Work",
+  title: "Project Gallery - See Our Work",
   description:
     "Browse real photos and footage from S.K Enterprise's septic tank cleaning, drain maintenance, and industrial waste management projects across Guwahati and Assam.",
   alternates: {
     canonical: `${SITE_URL}/gallery`,
   },
   openGraph: {
-    title: "Project Gallery — S.K Enterprise Guwahati",
+    title: "Project Gallery - S.K Enterprise Guwahati",
     description:
       "See real project photos from our septic tank cleaning and drain maintenance operations. Professional work, documented results.",
     url: `${SITE_URL}/gallery`,

@@ -1,20 +1,16 @@
 "use client";
 
-import Link from "next/link";
+import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import {
+  ArrowRight,
+  Building2,
+  Cog,
+  Droplets,
+  Factory,
   Truck,
   Zap,
-  Building2,
-  Factory,
-  Droplets,
-  Cog,
-  ArrowRight,
 } from "lucide-react";
-import {
-  FadeUp,
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/ui/motion";
+import Link from "next/link";
 
 interface Service {
   _id: string;
@@ -40,60 +36,51 @@ export default function ServicesPreview({ services }: ServicesPreviewProps) {
   const previewServices = services.slice(0, 3);
 
   return (
-    <section id="services" className="py-24 lg:py-32 bg-white">
+    <section id="services" className="bg-white py-20 lg:py-28">
       <div className="section-container">
-        {/* Section header */}
-        <FadeUp className="text-center mb-16">
-          <p className="section-label">What We Do</p>
-          <h2 className="section-title">Our Services</h2>
+        <FadeUp className="mx-auto mb-14 max-w-3xl text-center">
+          <p className="section-label justify-center">What We Do</p>
+          <h2 className="section-title">Enterprise-Grade Cleaning Services</h2>
           <p className="section-subtitle mx-auto">
-            Professional septic tank, drain, and sewer cleaning services
-            with modern mechanized equipment for homes and businesses.
+            Mechanized septic, drain, sewer, and waste-management support for
+            residential, commercial, institutional, and industrial sites.
           </p>
         </FadeUp>
 
-        {/* Service cards */}
-        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <StaggerContainer className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {previewServices.map((service) => {
             const Icon = iconMap[service.icon] || Cog;
 
             return (
               <StaggerItem key={service._id}>
-                <div className="group bg-slate-50 hover:bg-white rounded-2xl p-7 ring-1 ring-slate-200/60 hover:ring-navy-200 transition-all duration-300 card-hover h-full">
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl bg-navy-900 group-hover:bg-brand-green-600 flex items-center justify-center mb-6 transition-colors duration-300">
-                    <Icon className="h-6 w-6 text-white" />
+                <article className="enterprise-card card-hover group flex h-full flex-col p-6 lg:p-7">
+                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-navy-900 text-white transition-colors duration-300 group-hover:bg-brand-green-600">
+                    <Icon className="h-6 w-6" />
                   </div>
 
-                  {/* Title */}
                   <h3
-                    className="text-lg font-bold text-navy-900 mb-3"
+                    className="text-xl font-extrabold leading-snug text-navy-950"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {service.title}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-slate-600 text-sm leading-relaxed">
+                  <p className="mt-3 flex-1 text-sm leading-7 text-slate-600">
                     {service.description}
                   </p>
-                </div>
+                </article>
               </StaggerItem>
             );
           })}
         </StaggerContainer>
 
-        {/* View all link */}
-        <FadeUp className="text-center mt-12">
+        <FadeUp className="mt-10 text-center">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-brand-green-600 hover:text-brand-green-500 font-semibold text-base transition-colors duration-200 group"
+            className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-navy-950 transition-colors hover:border-brand-green-600 hover:text-brand-green-700"
           >
             View All Services
-            <ArrowRight
-              size={18}
-              className="transition-transform group-hover:translate-x-1"
-            />
+            <ArrowRight size={17} />
           </Link>
         </FadeUp>
       </div>

@@ -1,8 +1,8 @@
 "use client";
 
-import { Phone, MessageCircle, Star, Shield, Clock } from "lucide-react";
-import { motion } from "framer-motion";
 import { CountUp } from "@/components/ui/motion";
+import { motion } from "framer-motion";
+import { Clock, MessageCircle, Phone, Shield, Star } from "lucide-react";
 
 interface HeroClientProps {
   siteSettings: {
@@ -36,61 +36,44 @@ export default function HeroClient({ siteSettings }: HeroClientProps) {
   return (
     <section
       aria-label="Hero"
-      className="relative min-h-[100svh] flex items-center overflow-hidden"
+      className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
-      {/* Background: premium navy gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950" />
-
-      {/* Industrial grid overlay */}
       <div className="absolute inset-0 industrial-grid" />
 
-      {/* Decorative geometric elements — right side */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className="absolute -top-16 right-[8%] w-[340px] h-[340px] rounded-3xl bg-navy-800/25 border border-white/[0.04]"
-          style={{ transform: "rotate(15deg)" }}
+          className="absolute right-[7%] top-[14%] h-72 w-72 rounded-lg border border-white/10 bg-white/[0.025]"
+          style={{ transform: "rotate(14deg)" }}
         />
         <div
-          className="absolute top-[35%] right-[4%] w-[260px] h-[260px] rounded-2xl bg-navy-700/15 border border-white/[0.03]"
-          style={{ transform: "rotate(-12deg)" }}
+          className="absolute right-[17%] top-[36%] h-36 w-36 rounded-lg border border-brand-green-400/20 bg-brand-green-600/10"
+          style={{ transform: "rotate(-10deg)" }}
         />
-        <div
-          className="absolute top-[22%] right-[22%] w-[120px] h-[120px] rounded-xl bg-brand-green-600/8 border border-brand-green-400/10"
-          style={{ transform: "rotate(30deg)" }}
-        />
-        <div
-          className="absolute bottom-[10%] right-[12%] w-[200px] h-[200px] rounded-2xl bg-navy-800/20 border border-white/[0.03]"
-          style={{ transform: "rotate(-25deg)" }}
-        />
-        <div className="absolute -bottom-24 -left-24 w-[400px] h-[400px] rounded-full bg-brand-green-600/5" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 section-container w-full pt-32 pb-20 lg:pt-36 lg:pb-28">
+      <div className="section-container relative z-10 w-full pt-32 pb-20 lg:pt-36 lg:pb-28">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="max-w-4xl"
         >
-          {/* Trust badge */}
           <motion.div variants={itemVariants}>
-            <div className="inline-flex items-center gap-2 text-sm text-navy-300">
+            <div className="inline-flex items-center gap-2 text-sm font-semibold text-navy-200">
               <Star
-                size={14}
+                size={15}
                 className="text-brand-green-400"
                 fill="currentColor"
               />
-              <span className="font-medium">
-                4.8 Rating · Trusted Across Guwahati
-              </span>
+              <span>4.8 rating trusted across Guwahati</span>
             </div>
           </motion.div>
 
-          {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="mt-8 text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] tracking-tight"
+            className="mt-8 max-w-4xl text-4xl font-extrabold leading-[1.12] text-white sm:text-5xl lg:text-7xl"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             {siteSettings?.heroTitle || (
@@ -102,27 +85,25 @@ export default function HeroClient({ siteSettings }: HeroClientProps) {
             )}
           </motion.h1>
 
-          {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="mt-6 text-lg lg:text-xl text-navy-200 max-w-2xl leading-relaxed"
+            className="mt-6 max-w-2xl text-base leading-7 text-navy-200 sm:text-lg lg:text-xl"
           >
             {siteSettings?.heroDescription ||
               "Fast, hygienic, and affordable septic tank cleaning services across Guwahati with modern mechanized equipment and 24/7 support."}
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap gap-4 mt-10"
+            className="mt-10 flex flex-wrap gap-3"
           >
             <a
               href={`tel:${phone}`}
-              className="group inline-flex items-center gap-2.5 bg-brand-green-600 hover:bg-brand-green-500 text-white px-7 py-4 rounded-xl font-semibold text-base transition-all duration-200 shadow-lg shadow-brand-green-600/25 hover:shadow-brand-green-500/30"
+              className="group inline-flex items-center gap-2.5 rounded-lg bg-brand-green-600 px-7 py-4 text-base font-bold text-white shadow-lg shadow-brand-green-600/20 transition-all duration-200 hover:bg-brand-green-700 hover:shadow-brand-green-600/25"
             >
               <Phone
                 size={18}
-                className="transition-transform group-hover:scale-110"
+                className="transition-transform group-hover:scale-105"
               />
               Call Now
             </a>
@@ -131,69 +112,64 @@ export default function HeroClient({ siteSettings }: HeroClientProps) {
               href={`https://wa.me/${whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 glass-card bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-white px-7 py-4 rounded-xl font-semibold text-base transition-all duration-200"
+              className="group inline-flex items-center gap-2.5 rounded-lg border border-white/15 bg-white/10 px-7 py-4 text-base font-bold text-white transition-all duration-200 hover:bg-white/15"
             >
               <MessageCircle
                 size={18}
-                className="transition-transform group-hover:scale-110"
+                className="transition-transform group-hover:scale-105"
               />
               WhatsApp
             </a>
           </motion.div>
 
-          {/* Trust indicators */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center gap-6 mt-10 text-sm text-navy-300"
+            className="mt-10 flex flex-wrap items-center gap-5 text-sm font-medium text-navy-200"
           >
             <div className="flex items-center gap-2">
               <Shield size={16} className="text-brand-green-400" />
-              <span>Safe &amp; Hygienic</span>
+              <span>Safe and hygienic</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock size={16} className="text-brand-green-400" />
-              <span>Fast Response</span>
+              <span>Fast response</span>
             </div>
           </motion.div>
 
-          {/* Stats strip - fixed */}
           <motion.div
             variants={itemVariants}
-            className="grid grid-cols-1 sm:grid-cols-[1.35fr_1fr_1fr] gap-6 mt-16 pt-10 border-t border-white/10 max-w-3xl"
+            className="mt-14 grid max-w-3xl gap-5 border-t border-white/10 pt-8 sm:grid-cols-3"
           >
-            {/* Projects */}
             <div className="min-w-0">
               <div
-                className="text-[2rem] sm:text-[2.2rem] lg:text-[3rem] font-extrabold text-white leading-none tracking-tight whitespace-nowrap"
+                className="text-2xl font-extrabold leading-none text-white sm:text-3xl lg:text-4xl"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 <CountUp end={300000} suffix="+" />
               </div>
-              <div className="text-sm text-navy-300 mt-2">
-                Projects Completed
+              <div className="mt-2 text-sm text-navy-300">
+                Projects completed
               </div>
             </div>
 
-            {/* Rating */}
-            <div className="min-w-0">
+            <div className="min-w-0 ">
               <div
-                className="text-[2rem] sm:text-[2.2rem] lg:text-[3rem] font-extrabold text-white leading-none tracking-tight whitespace-nowrap"
+                className="text-3xl font-extrabold leading-none text-white sm:text-4xl lg:text-5xl"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                4.8★
+                4.8
               </div>
-              <div className="text-sm text-navy-300 mt-2">Customer Rating</div>
+              <div className="mt-2 text-sm text-navy-300">Customer rating</div>
             </div>
 
-            {/* Available */}
             <div className="min-w-0">
               <div
-                className="text-[2rem] sm:text-[2.2rem] lg:text-[3rem] font-extrabold text-white leading-none tracking-tight whitespace-nowrap"
+                className="text-3xl font-extrabold leading-none text-white sm:text-4xl lg:text-5xl"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 24/7
               </div>
-              <div className="text-sm text-navy-300 mt-2">Available</div>
+              <div className="mt-2 text-sm text-navy-300">Availability</div>
             </div>
           </motion.div>
         </motion.div>

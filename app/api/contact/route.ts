@@ -73,7 +73,7 @@ function buildEmailHtml(data: ContactFormData, submittedAt: string): string {
           New Service Request
         </h1>
         <p style="color: #94b8d4; margin: 8px 0 0; font-size: 14px;">
-          S.K Enterprise — Guwahati
+          S.K Enterprise - Guwahati
         </p>
       </div>
 

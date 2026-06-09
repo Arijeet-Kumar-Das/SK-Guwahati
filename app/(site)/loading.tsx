@@ -6,7 +6,7 @@ export default function Loading() {
           <div className="absolute inset-0 rounded-full border-2 border-slate-200" />
           <div className="absolute inset-0 rounded-full border-2 border-brand-green-600 border-t-transparent animate-spin" />
         </div>
-        <p className="text-sm text-slate-400 font-medium">Loading…</p>
+        <p className="text-sm text-slate-400 font-medium">Loading...</p>
       </div>
     </div>
   );

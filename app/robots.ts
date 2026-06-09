@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/seo";
  *
  * Why: Controls which pages search engine crawlers can access.
  * - Allows all pages publicly
- * - Blocks /studio (Sanity CMS admin — not for public indexing)
+ * - Blocks /studio (Sanity CMS admin - not for public indexing)
  * - References the sitemap for efficient crawling
  */
 export default function robots(): MetadataRoute.Robots {

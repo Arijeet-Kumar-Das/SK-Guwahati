@@ -7,14 +7,14 @@ import Fleet from "@/components/sections/Fleet";
 import ContactCTA from "@/components/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Our Fleet — Mechanized Cleaning Vehicles",
+  title: "Our Fleet - Mechanized Cleaning Vehicles",
   description:
-    "Explore S.K Enterprise's fleet of mechanized cleaning vehicles — cesspool trucks, super sucker machines, and jetting units ranging from 1,000 to 6,000 litres. Serving Guwahati and all of Assam.",
+    "Explore S.K Enterprise's fleet of mechanized cleaning vehicles - cesspool trucks, super sucker machines, and jetting units ranging from 1,000 to 6,000 litres. Serving Guwahati and all of Assam.",
   alternates: {
     canonical: `${SITE_URL}/fleet`,
   },
   openGraph: {
-    title: "Mechanized Cleaning Fleet — S.K Enterprise Guwahati",
+    title: "Mechanized Cleaning Fleet - S.K Enterprise Guwahati",
     description:
       "View our range of specialized cesspool vehicles and super sucker machines for residential, commercial, and industrial cleaning operations.",
     url: `${SITE_URL}/fleet`,
@@ -31,7 +31,7 @@ export default async function FleetPage() {
     <>
       <PageHeader
         title="Our Fleet"
-        subtitle="Specialized cesspool vehicles and mechanized equipment for every cleaning challenge — from compact residential units to heavy-duty industrial machines."
+        subtitle="Specialized cesspool vehicles and mechanized equipment for every cleaning challenge - from compact residential units to heavy-duty industrial machines."
         breadcrumbs={[{ label: "Fleet" }]}
       />
 

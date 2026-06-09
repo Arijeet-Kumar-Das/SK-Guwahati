@@ -8,7 +8,7 @@ import ChatBot from "@/components/layout/ChatBot";
 export const dynamic = "force-dynamic";
 
 /**
- * Site layout — wraps all public-facing pages with Navbar, Footer,
+ * Site layout wraps all public-facing pages with Navbar, Footer,
  * and ChatBot. Does NOT apply to /studio (Sanity CMS).
  */
 export default async function SiteLayout({

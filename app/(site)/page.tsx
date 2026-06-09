@@ -20,7 +20,7 @@ import {
 import { SITE_URL } from "@/lib/seo";
 
 /**
- * Homepage metadata — overrides root layout defaults.
+ * Homepage metadata - overrides root layout defaults.
  *
  * SEO rationale:
  * - Uses `title.absolute` to bypass the template and set the exact title
@@ -31,7 +31,7 @@ import { SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "S.K Enterprise — Professional Septic Tank Cleaning in Guwahati | 24/7 Service",
+      "S.K Enterprise - Professional Septic Tank Cleaning in Guwahati | 24/7 Service",
   },
   alternates: {
     canonical: SITE_URL,

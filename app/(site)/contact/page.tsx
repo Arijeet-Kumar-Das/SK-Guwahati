@@ -12,16 +12,16 @@ import FAQ from "@/components/sections/FAQ";
  * SEO rationale:
  * - Targets "contact septic tank cleaning Guwahati" and "septic tank service phone number Guwahati"
  * - Includes phone number directly in meta description (Google can display this)
- * - High commercial intent — people searching this are ready to book
+ * - High commercial intent - people searching this are ready to book
  */
 export const metadata: Metadata = {
-  title: "Contact Us — Book Septic Tank Cleaning in Guwahati",
+  title: "Contact Us - Book Septic Tank Cleaning in Guwahati",
   description: `Contact S.K Enterprise for septic tank cleaning in Guwahati. Call ${BUSINESS.phone} or WhatsApp for instant booking. Available 24/7 across all areas of Guwahati, Assam.`,
   alternates: {
     canonical: `${SITE_URL}/contact`,
   },
   openGraph: {
-    title: "Contact S.K Enterprise — Septic Tank Cleaning Guwahati",
+    title: "Contact S.K Enterprise - Septic Tank Cleaning Guwahati",
     description: `Book septic tank cleaning services in Guwahati. Call ${BUSINESS.phone} for fast, professional service. 24/7 availability.`,
     url: `${SITE_URL}/contact`,
   },

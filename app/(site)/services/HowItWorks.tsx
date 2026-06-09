@@ -29,10 +29,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section
-      aria-label="How It Works"
-      className="py-16 lg:py-24 bg-slate-50"
-    >
+    <section aria-label="How It Works" className="py-16 lg:py-24 bg-slate-50">
       <div className="section-container">
         {/* Section Header */}
         <FadeUp className="text-center mb-16">
