@@ -27,7 +27,7 @@ export const BUSINESS = {
   priceRange: "₹₹",
   foundingYear: 2018,
   description:
-    "Professional septic tank cleaning, drain cleaning, and sewer services in Guwahati, Assam. 500+ jobs completed, 4.8★ rated, available 24/7.",
+    "Professional septic tank cleaning, drain cleaning, and sewer services in Guwahati, Assam. 300000+ jobs completed, 4.8★ rated, available 24/7.",
 } as const;
 
 /** Target keywords for local SEO — used across meta descriptions and structured data */

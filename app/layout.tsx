@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Trusted septic tank cleaning, drain cleaning, and sewer services in Guwahati, Assam. 500+ jobs completed, 4.8★ rated, 24/7 available. Fast response, modern equipment, affordable pricing. Call 09864074129.",
+    "Trusted septic tank cleaning, drain cleaning, and sewer services in Guwahati, Assam. 300000+ jobs completed, 4.8★ rated, 24/7 available. Fast response, modern equipment, affordable pricing. Call 09864074129.",
 
   keywords: TARGET_KEYWORDS as unknown as string[],
 
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "S.K Enterprise — Septic Tank Cleaning in Guwahati | 24/7",
     description:
-      "Professional septic tank cleaning across Guwahati. 500+ jobs completed, 4.8★ rated. Call 09864074129 for fast service.",
+      "Professional septic tank cleaning across Guwahati. 300000+ jobs completed, 4.8★ rated. Call 09864074129 for fast service.",
     images: ["/og-image.png"],
   },
 

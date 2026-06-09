@@ -57,7 +57,7 @@ export default function TrustedCustomers({ customers }: TrustedCustomersProps) {
                       src={urlFor(customer.logo).width(400).url()}
                       alt={customer.name}
                       fill
-                      className="object-contain  transition-all duration-500"
+                      className="object-contain    transition-all duration-500"
                     />
                   )}
                 </div>
@@ -87,7 +87,7 @@ export default function TrustedCustomers({ customers }: TrustedCustomersProps) {
                   className="text-4xl font-bold text-brand-green-400 mb-2"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
-                  <CountUp end={500} suffix="+" />
+                  <CountUp end={300000} suffix="+" />
                 </h3>
                 <p className="text-navy-300">Projects Completed</p>
               </div>

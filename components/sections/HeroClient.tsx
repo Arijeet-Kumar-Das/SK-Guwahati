@@ -167,7 +167,7 @@ export default function HeroClient({ siteSettings }: HeroClientProps) {
                 className="text-[2rem] sm:text-[2.2rem] lg:text-[3rem] font-extrabold text-white leading-none tracking-tight whitespace-nowrap"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                <CountUp end={200000} suffix="+" />
+                <CountUp end={300000} suffix="+" />
               </div>
               <div className="text-sm text-navy-300 mt-2">
                 Projects Completed
