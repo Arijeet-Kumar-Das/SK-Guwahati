@@ -76,6 +76,9 @@ const INITIAL_FORM: FormData = {
 const SERVICES = [
   "Septic Tank Cleaning",
   "Drain Cleaning",
+  "Sewer Cleaning",
+  "Commercial Cleaning",
+  "Industrial Cleaning",
   "Emergency Service",
 ] as const;
 

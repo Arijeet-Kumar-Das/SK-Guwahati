@@ -529,7 +529,7 @@ export default function ChatBot({
           await botSay("What is your address or location in Guwahati?");
           setFlow("book_location");
         } else {
-          const serviceOpts: QuickOption[] = services.slice(0, 5).map((service) => ({
+          const serviceOpts: QuickOption[] = services.slice(0, 6).map((service) => ({
             label: service.title,
             action: `select_service_${service.title}`,
             icon: <ChevronRight size={14} />,
