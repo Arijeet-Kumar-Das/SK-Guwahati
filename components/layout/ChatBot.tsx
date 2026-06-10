@@ -494,7 +494,7 @@ export default function ChatBot({
         setFlow("vehicle_recommend_result");
       }
     },
-    [areas, botSay, fleet, goMainMenu, phone, services, userSay, whatsapp]
+    [areas, botSay, fleet, goMainMenu, lead, phone, services, userSay, whatsapp]
   );
 
   const handleTextSubmit = useCallback(
