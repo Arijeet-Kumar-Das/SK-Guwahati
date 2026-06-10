@@ -15,7 +15,7 @@ export default function PageHeader({
   breadcrumbs,
 }: PageHeaderProps) {
   return (
-    <section className="page-header pt-32 pb-16 lg:pt-40 lg:pb-20">
+    <section className="page-header pt-24 pb-12 sm:pt-32 sm:pb-16 lg:pt-40 lg:pb-20">
       <div className="absolute inset-0 industrial-grid" />
       <div className="absolute inset-x-0 bottom-0 h-px bg-white/10" />
 

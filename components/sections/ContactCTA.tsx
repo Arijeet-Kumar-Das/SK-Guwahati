@@ -12,7 +12,7 @@ interface ContactCTAProps {
 
 export default function ContactCTA({ siteSettings }: ContactCTAProps) {
   const phone = siteSettings?.phone || "09864074129";
-  const whatsapp = siteSettings?.whatsapp || "919864074129";
+  const whatsapp = siteSettings?.whatsapp || "918005429901";
 
   return (
     <section

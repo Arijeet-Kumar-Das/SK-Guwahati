@@ -165,7 +165,7 @@ export default function Contact({ siteSettings }: ContactProps) {
     }, 6000);
   }
 
-  const whatsapp = siteSettings.whatsapp || "919864074129";
+  const whatsapp = siteSettings.whatsapp || "918005429901";
 
   return (
     <section

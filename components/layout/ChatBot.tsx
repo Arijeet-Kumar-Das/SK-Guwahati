@@ -662,7 +662,7 @@ export default function ChatBot({
       <AnimatePresence>
         {!open && (
           <motion.div
-            className="fixed bottom-5 right-5 z-50 sm:bottom-6 sm:right-6"
+            className="fixed bottom-5 right-5 z-40 sm:bottom-6 sm:right-6"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
@@ -699,7 +699,7 @@ export default function ChatBot({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 18, scale: 0.97 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-0 right-0 z-50 flex h-full w-full flex-col overflow-hidden border border-slate-200 bg-white shadow-2xl sm:bottom-6 sm:right-6 sm:h-[600px] sm:max-h-[85vh] sm:w-[400px] sm:rounded-lg"
+            className="fixed bottom-0 right-0 z-[52] flex h-full w-full flex-col overflow-hidden border border-slate-200 bg-white shadow-2xl sm:bottom-6 sm:right-6 sm:h-[600px] sm:max-h-[85vh] sm:w-[400px] sm:rounded-lg"
           >
             <div className="flex shrink-0 items-center justify-between bg-navy-950 px-5 py-4 text-white">
               <div className="flex items-center gap-3">

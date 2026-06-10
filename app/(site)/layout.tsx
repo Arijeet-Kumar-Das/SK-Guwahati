@@ -41,7 +41,7 @@ export default async function SiteLayout({
         areas={areas || []}
         fleet={fleet || []}
         phone={siteSettings?.phone || "09864074129"}
-        whatsapp={siteSettings?.whatsapp || "919864074129"}
+        whatsapp={siteSettings?.whatsapp || "918005429901"}
       />
     </>
   );

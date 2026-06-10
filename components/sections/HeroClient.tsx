@@ -31,7 +31,7 @@ const itemVariants = {
 
 export default function HeroClient({ siteSettings }: HeroClientProps) {
   const phone = siteSettings?.phone || "09864074129";
-  const whatsapp = siteSettings?.whatsapp || "919864074129";
+  const whatsapp = siteSettings?.whatsapp || "918005429901";
 
   return (
     <section
@@ -53,7 +53,7 @@ export default function HeroClient({ siteSettings }: HeroClientProps) {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10" />
       </div>
 
-      <div className="section-container relative z-10 w-full pt-32 pb-20 lg:pt-36 lg:pb-28">
+      <div className="section-container relative z-10 w-full pt-24 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-28">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -138,11 +138,11 @@ export default function HeroClient({ siteSettings }: HeroClientProps) {
 
           <motion.div
             variants={itemVariants}
-            className="mt-14 grid max-w-3xl gap-5 border-t border-white/10 pt-8 sm:grid-cols-3"
+            className="mt-10 grid max-w-3xl gap-5 border-t border-white/10 pt-8 sm:mt-14 sm:grid-cols-3"
           >
             <div className="min-w-0">
               <div
-                className="text-2xl font-extrabold leading-none text-white sm:text-3xl lg:text-4xl"
+                className="text-3xl font-extrabold leading-none text-white sm:text-3xl lg:text-4xl"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 <CountUp end={300000} suffix="+" />
