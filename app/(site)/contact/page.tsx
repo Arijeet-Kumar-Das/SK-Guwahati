@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SITE_URL, BUSINESS } from "@/lib/seo";
 import { getSiteSettings } from "@/lib/sanity";
-import { getFaqs } from "@/lib/cms";
+import { getFaqs, getServices } from "@/lib/cms";
 import PageHeader from "@/components/layout/PageHeader";
 import Contact from "@/components/sections/Contact";
 import FAQ from "@/components/sections/FAQ";
@@ -28,9 +28,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ContactPage() {
-  const [siteSettings, faqs] = await Promise.all([
+  const [siteSettings, faqs, services] = await Promise.all([
     getSiteSettings(),
     getFaqs(),
+    getServices(),
   ]);
 
   return (
@@ -42,7 +43,7 @@ export default async function ContactPage() {
       />
 
       <main id="main-content">
-        <Contact siteSettings={siteSettings} />
+        <Contact siteSettings={siteSettings} services={services} />
         <FAQ faqs={faqs} />
       </main>
     </>

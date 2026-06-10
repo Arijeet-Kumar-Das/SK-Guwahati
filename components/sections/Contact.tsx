@@ -19,6 +19,7 @@ interface ContactProps {
     workingHours: string;
     googleMapsUrl: string;
   };
+  services?: { _id: string; title: string }[];
 }
 
 interface FormData {
@@ -73,7 +74,7 @@ const INITIAL_FORM: FormData = {
   message: "",
 };
 
-const SERVICES = [
+const FALLBACK_SERVICES = [
   "Septic Tank Cleaning",
   "Drain Cleaning",
   "Sewer Cleaning",
@@ -124,7 +125,12 @@ function buildWhatsAppUrl(data: FormData): string {
   return `https://wa.me/${WHATSAPP_BOOKING_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
-export default function Contact({ siteSettings }: ContactProps) {
+export default function Contact({ siteSettings, services }: ContactProps) {
+  // Use CMS service titles, fall back to hardcoded names
+  const serviceNames =
+    services && services.length > 0
+      ? services.map((s) => s.title)
+      : FALLBACK_SERVICES;
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
@@ -360,7 +366,7 @@ export default function Contact({ siteSettings }: ContactProps) {
                       }
                     >
                       <option value="">Select service</option>
-                      {SERVICES.map((service) => (
+                      {serviceNames.map((service) => (
                         <option key={service} value={service}>
                           {service}
                         </option>

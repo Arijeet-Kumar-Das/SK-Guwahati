@@ -100,7 +100,11 @@ const MAIN_MENU_OPTIONS: QuickOption[] = [
   { label: "Service Info", action: "services", icon: <Info size={14} /> },
   { label: "Areas Covered", action: "areas", icon: <MapPin size={14} /> },
   { label: "Fleet Info", action: "fleet", icon: <Truck size={14} /> },
-  { label: "Emergency", action: "emergency", icon: <AlertTriangle size={14} /> },
+  {
+    label: "Emergency",
+    action: "emergency",
+    icon: <AlertTriangle size={14} />,
+  },
   { label: "Contact Us", action: "contact", icon: <Phone size={14} /> },
 ];
 
@@ -120,7 +124,11 @@ function capacityNumber(raw: string): number {
 }
 
 function backOption(): QuickOption {
-  return { label: "Back to Menu", action: "menu", icon: <ArrowLeft size={14} /> };
+  return {
+    label: "Back to Menu",
+    action: "menu",
+    icon: <ArrowLeft size={14} />,
+  };
 }
 
 function buildBookingWhatsAppUrl(lead: LeadData): string {
@@ -213,7 +221,7 @@ export default function ChatBot({
         }, delay);
       });
     },
-    []
+    [],
   );
 
   const userSay = useCallback((text: string) => {
@@ -234,7 +242,7 @@ export default function ChatBot({
       await botSay(
         "Hello. Welcome to S.K Enterprise. I can help with booking, service details, fleet information, and urgent support.",
         undefined,
-        250
+        250,
       );
       await botSay("How can I assist you today?", MAIN_MENU_OPTIONS, 350);
       setFlow("main_menu");
@@ -260,7 +268,7 @@ export default function ChatBot({
         opts.push(backOption());
         await botSay(
           "We provide mechanized sanitation and cleaning services. Choose a service to learn more.",
-          opts
+          opts,
         );
         setFlow("service_list");
         return;
@@ -272,9 +280,13 @@ export default function ChatBot({
         await botSay(
           `We serve Guwahati and surrounding areas including:\n\n${areaNames}\n\nType a location name to check coverage.`,
           [
-            { label: "Book Service", action: "book", icon: <Wrench size={14} /> },
+            {
+              label: "Book Service",
+              action: "book",
+              icon: <Wrench size={14} />,
+            },
             backOption(),
-          ]
+          ],
         );
         setFlow("area_check");
         return;
@@ -295,7 +307,7 @@ export default function ChatBot({
         opts.push(backOption());
         await botSay(
           "Our fleet includes mechanized vehicles for different cleaning requirements. Select a vehicle or ask for a recommendation.",
-          opts
+          opts,
         );
         setFlow("fleet_list");
         return;
@@ -306,14 +318,18 @@ export default function ChatBot({
         await botSay(
           `**Emergency Service Available 24/7**\n\nCall us immediately at **${phone}** or message us on WhatsApp for urgent support.`,
           [
-            { label: `Call ${phone}`, action: "call", icon: <Phone size={14} /> },
+            {
+              label: `Call ${phone}`,
+              action: "call",
+              icon: <Phone size={14} />,
+            },
             {
               label: "WhatsApp",
               action: "whatsapp",
               icon: <MessageCircle size={14} />,
             },
             backOption(),
-          ]
+          ],
         );
         setFlow("emergency");
         return;
@@ -324,15 +340,23 @@ export default function ChatBot({
         await botSay(
           `**Phone:** ${phone}\n**WhatsApp:** Available\n**Hours:** 24/7 all days\n**Office:** Solapara Road, Guwahati\n\nYou can also use the Contact page for the full enquiry form and map.`,
           [
-            { label: `Call ${phone}`, action: "call", icon: <Phone size={14} /> },
+            {
+              label: `Call ${phone}`,
+              action: "call",
+              icon: <Phone size={14} />,
+            },
             {
               label: "WhatsApp",
               action: "whatsapp",
               icon: <MessageCircle size={14} />,
             },
-            { label: "Book Service", action: "book", icon: <Wrench size={14} /> },
+            {
+              label: "Book Service",
+              action: "book",
+              icon: <Wrench size={14} />,
+            },
             backOption(),
-          ]
+          ],
         );
         setFlow("contact");
         return;
@@ -360,9 +384,17 @@ export default function ChatBot({
         await botSay(
           "Your booking request has been opened in WhatsApp. Our team will confirm your service shortly.",
           [
-            { label: `Call ${phone}`, action: "call", icon: <Phone size={14} /> },
-            { label: "Start Over", action: "menu", icon: <ArrowLeft size={14} /> },
-          ]
+            {
+              label: `Call ${phone}`,
+              action: "call",
+              icon: <Phone size={14} />,
+            },
+            {
+              label: "Start Over",
+              action: "menu",
+              icon: <ArrowLeft size={14} />,
+            },
+          ],
         );
         return;
       }
@@ -387,7 +419,7 @@ export default function ChatBot({
                 icon: <Info size={14} />,
               },
               backOption(),
-            ]
+            ],
           );
           setFlow("service_detail");
         }
@@ -412,10 +444,18 @@ export default function ChatBot({
           await botSay(
             `**${vehicle.name}**\nCapacity: ${vehicle.capacity}\n\n${vehicle.description}\n\nWant to book a service with this vehicle?`,
             [
-              { label: "Book Service", action: "book", icon: <Wrench size={14} /> },
-              { label: "Other Vehicles", action: "fleet", icon: <Truck size={14} /> },
+              {
+                label: "Book Service",
+                action: "book",
+                icon: <Wrench size={14} />,
+              },
+              {
+                label: "Other Vehicles",
+                action: "fleet",
+                icon: <Truck size={14} />,
+              },
               backOption(),
-            ]
+            ],
           );
           setFlow("fleet_detail");
         }
@@ -424,26 +464,23 @@ export default function ChatBot({
 
       if (action === "vehicle_recommend") {
         userSay("Help me choose a vehicle");
-        await botSay(
-          "What type of property needs service?",
-          [
-            {
-              label: "Residential",
-              action: "vr_residential",
-              icon: <ChevronRight size={14} />,
-            },
-            {
-              label: "Commercial",
-              action: "vr_commercial",
-              icon: <ChevronRight size={14} />,
-            },
-            {
-              label: "Industrial",
-              action: "vr_industrial",
-              icon: <ChevronRight size={14} />,
-            },
-          ]
-        );
+        await botSay("What type of property needs service?", [
+          {
+            label: "Residential",
+            action: "vr_residential",
+            icon: <ChevronRight size={14} />,
+          },
+          {
+            label: "Commercial",
+            action: "vr_commercial",
+            icon: <ChevronRight size={14} />,
+          },
+          {
+            label: "Industrial",
+            action: "vr_industrial",
+            icon: <ChevronRight size={14} />,
+          },
+        ]);
         setFlow("vehicle_recommend_q1");
         return;
       }
@@ -455,7 +492,7 @@ export default function ChatBot({
             ? "Residential"
             : type === "commercial"
               ? "Commercial"
-              : "Industrial"
+              : "Industrial",
         );
 
         let recommended: FleetItem | undefined;
@@ -485,16 +522,34 @@ export default function ChatBot({
           await botSay(
             `Based on your needs, I recommend:\n\n**${recommended.name}**\nCapacity: ${recommended.capacity}\n\n${reason}\n\nWould you like to book this?`,
             [
-              { label: "Book Service", action: "book", icon: <Wrench size={14} /> },
-              { label: "See All Vehicles", action: "fleet", icon: <Truck size={14} /> },
+              {
+                label: "Book Service",
+                action: "book",
+                icon: <Wrench size={14} />,
+              },
+              {
+                label: "See All Vehicles",
+                action: "fleet",
+                icon: <Truck size={14} />,
+              },
               backOption(),
-            ]
+            ],
           );
         }
         setFlow("vehicle_recommend_result");
       }
     },
-    [areas, botSay, fleet, goMainMenu, lead, phone, services, userSay, whatsapp]
+    [
+      areas,
+      botSay,
+      fleet,
+      goMainMenu,
+      lead,
+      phone,
+      services,
+      userSay,
+      whatsapp,
+    ],
   );
 
   const handleTextSubmit = useCallback(
@@ -507,7 +562,9 @@ export default function ChatBot({
       if (flow === "book_name") {
         userSay(trimmed);
         setLead((prev) => ({ ...prev, name: trimmed }));
-        await botSay(`Nice to meet you, ${trimmed}. What is your phone number?`);
+        await botSay(
+          `Nice to meet you, ${trimmed}. What is your phone number?`,
+        );
         setFlow("book_phone");
         return;
       }
@@ -516,9 +573,7 @@ export default function ChatBot({
         userSay(trimmed);
         const cleaned = normalizePhone(trimmed);
         if (!PHONE_REGEX.test(cleaned)) {
-          await botSay(
-            "Please enter a valid 10-digit Indian mobile number, for example 9864074129."
-          );
+          await botSay("Please enter a valid 10-digit Indian mobile number");
           return;
         }
 
@@ -529,11 +584,13 @@ export default function ChatBot({
           await botSay("What is your address or location in Guwahati?");
           setFlow("book_location");
         } else {
-          const serviceOpts: QuickOption[] = services.slice(0, 6).map((service) => ({
-            label: service.title,
-            action: `select_service_${service.title}`,
-            icon: <ChevronRight size={14} />,
-          }));
+          const serviceOpts: QuickOption[] = services
+            .slice(0, 6)
+            .map((service) => ({
+              label: service.title,
+              action: `select_service_${service.title}`,
+              icon: <ChevronRight size={14} />,
+            }));
           await botSay("Which service do you need?", serviceOpts);
           setFlow("book_service");
         }
@@ -559,7 +616,11 @@ export default function ChatBot({
             icon: <MessageCircle size={14} />,
           },
           { label: `Call ${phone}`, action: "call", icon: <Phone size={14} /> },
-          { label: "Start Over", action: "menu", icon: <ArrowLeft size={14} /> },
+          {
+            label: "Start Over",
+            action: "menu",
+            icon: <ArrowLeft size={14} />,
+          },
         ]);
         setFlow("book_summary");
         return;
@@ -571,34 +632,42 @@ export default function ChatBot({
         const found = areas.some(
           (area) =>
             area.name.toLowerCase().includes(lower) ||
-            lower.includes(area.name.toLowerCase())
+            lower.includes(area.name.toLowerCase()),
         );
 
         if (found) {
           await botSay(
             `Good news. We serve **${trimmed}** and nearby areas. Would you like to book a service?`,
             [
-              { label: "Book Service", action: "book", icon: <Wrench size={14} /> },
+              {
+                label: "Book Service",
+                action: "book",
+                icon: <Wrench size={14} />,
+              },
               {
                 label: "Check Another Area",
                 action: "areas",
                 icon: <MapPin size={14} />,
               },
               backOption(),
-            ]
+            ],
           );
         } else {
           await botSay(
             `We may still serve **${trimmed}** because coverage is expanding. Call us to confirm, or try a nearby area name.`,
             [
-              { label: `Call ${phone}`, action: "call", icon: <Phone size={14} /> },
+              {
+                label: `Call ${phone}`,
+                action: "call",
+                icon: <Phone size={14} />,
+              },
               {
                 label: "Check Another Area",
                 action: "areas",
                 icon: <MapPin size={14} />,
               },
               backOption(),
-            ]
+            ],
           );
         }
         setFlow("area_result");
@@ -608,11 +677,11 @@ export default function ChatBot({
       userSay(trimmed);
       await botSay(
         "I can help best through the guided options below.",
-        MAIN_MENU_OPTIONS
+        MAIN_MENU_OPTIONS,
       );
       setFlow("main_menu");
     },
-    [areas, botSay, flow, lead, phone, services, userSay]
+    [areas, botSay, flow, lead, phone, services, userSay],
   );
 
   const handleQuickAction = useCallback(
@@ -628,7 +697,7 @@ export default function ChatBot({
 
       handleAction(action);
     },
-    [botSay, handleAction, userSay]
+    [botSay, handleAction, userSay],
   );
 
   const onSubmit = (e: FormEvent) => {
@@ -752,16 +821,21 @@ export default function ChatBot({
                     }`}
                   >
                     <div className="whitespace-pre-line text-[13.5px] leading-6">
-                      {msg.text.split(/(\*\*[^*]+\*\*)/).map((segment, index) => {
-                        if (segment.startsWith("**") && segment.endsWith("**")) {
-                          return (
-                            <strong key={index} className="font-bold">
-                              {segment.slice(2, -2)}
-                            </strong>
-                          );
-                        }
-                        return <span key={index}>{segment}</span>;
-                      })}
+                      {msg.text
+                        .split(/(\*\*[^*]+\*\*)/)
+                        .map((segment, index) => {
+                          if (
+                            segment.startsWith("**") &&
+                            segment.endsWith("**")
+                          ) {
+                            return (
+                              <strong key={index} className="font-bold">
+                                {segment.slice(2, -2)}
+                              </strong>
+                            );
+                          }
+                          return <span key={index}>{segment}</span>;
+                        })}
                     </div>
 
                     {msg.options && msg.options.length > 0 && (
