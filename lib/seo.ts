@@ -4,7 +4,7 @@
  */
 
 /** Production URL - update this when deploying to your custom domain. */
-export const SITE_URL = "https://skenterprise-guwahati.com";
+export const SITE_URL = "https://skenterpriseguwahati.com";
 
 export const BUSINESS = {
   name: "S.K Enterprise",
