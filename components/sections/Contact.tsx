@@ -102,9 +102,8 @@ const CONTACT_INFO = [
 ];
 
 function inputClasses(hasError: boolean): string {
-  return `w-full rounded-lg border bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-slate-400 transition-all duration-200 focus:border-brand-green-600 focus:outline-none focus:ring-3 focus:ring-brand-green-600/15 disabled:cursor-not-allowed disabled:opacity-50 ${
-    hasError ? "border-red-400 bg-red-50/50" : "border-slate-300"
-  }`;
+  return `w-full rounded-lg border bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-slate-400 transition-all duration-200 focus:border-brand-green-600 focus:outline-none focus:ring-3 focus:ring-brand-green-600/15 disabled:cursor-not-allowed disabled:opacity-50 ${hasError ? "border-red-400 bg-red-50/50" : "border-slate-300"
+    }`;
 }
 
 /**
@@ -251,16 +250,13 @@ export default function Contact({ siteSettings, services }: ContactProps) {
               })}
 
               <div className="h-[330px] overflow-hidden rounded-lg border border-slate-200 shadow-[0_14px_36px_rgba(15,23,42,0.08)]">
+
                 <iframe
-                  src={
-                    siteSettings.googleMapsUrl ||
-                    "https://maps.google.com/maps?q=Solapara%20Road%20Guwahati&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                  }
+                  src="https://maps.google.com/maps?q=26.1797275,91.7564417&z=17&output=embed"
                   width="100%"
                   height="100%"
                   loading="lazy"
                   allowFullScreen
-                  title="S.K Enterprise location on Google Maps"
                   className="border-0"
                 />
               </div>
