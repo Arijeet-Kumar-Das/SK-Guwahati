@@ -10,7 +10,7 @@ import HowItWorks from "./HowItWorks";
 export const metadata: Metadata = {
   title: "Our Services - Septic Tank & Drain Cleaning in Guwahati",
   description:
-    "S.K Enterprise offers septic tank cleaning, drain cleaning, sewer cleaning, and emergency sanitation services in Guwahati, Assam. Modern equipment, trained technicians, 24/7 available. Call 09864074129.",
+    "S.K Enterprise offers septic tank cleaning, vacuum septic tank cleaning, drain cleaning, sewer cleaning, and emergency sanitation services in Guwahati, Assam. Modern mechanized equipment, trained technicians, 24/7 available. Call 09864074129.",
   alternates: {
     canonical: `${SITE_URL}/services`,
   },

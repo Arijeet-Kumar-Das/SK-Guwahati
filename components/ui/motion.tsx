@@ -249,12 +249,24 @@ export function CountUp({
   className,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, amount: 0.1, margin: "-20px" });
   const shouldReduceMotion = useReducedMotion();
-  const [count, setCount] = useState(0);
+
+  // Start with `end` so SSR and initial hydration always show the final value.
+  // After mount, we reset to 0 and animate up when the element scrolls into view.
+  const [count, setCount] = useState(end);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  // Mark as mounted (client-only) and reset count to 0 for animation
+  useEffect(() => {
+    setHasMounted(true);
+    if (!shouldReduceMotion) {
+      setCount(0);
+    }
+  }, [shouldReduceMotion]);
 
   useEffect(() => {
-    if (shouldReduceMotion || !isInView) return;
+    if (!hasMounted || shouldReduceMotion || !isInView) return;
 
     let startTime: number | null = null;
     let frame: number;
@@ -276,12 +288,14 @@ export function CountUp({
 
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, [isInView, end, duration, shouldReduceMotion]);
+  }, [isInView, end, duration, shouldReduceMotion, hasMounted]);
+
+  const displayValue = shouldReduceMotion ? end : count;
 
   return (
     <span ref={ref} className={className}>
       {prefix}
-      {(shouldReduceMotion ? end : count).toLocaleString("en-IN")}
+      {displayValue.toLocaleString("en-IN")}
       {suffix}
     </span>
   );

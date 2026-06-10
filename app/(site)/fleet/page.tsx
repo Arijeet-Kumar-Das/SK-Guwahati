@@ -7,7 +7,7 @@ import Fleet from "@/components/sections/Fleet";
 import ContactCTA from "@/components/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Our Fleet - Mechanized Cleaning Vehicles",
+  title: "Our Fleet - Mechanized Septic Tank Cleaning Vehicles in Guwahati",
   description:
     "Explore S.K Enterprise's fleet of mechanized cleaning vehicles - cesspool trucks, super sucker machines, and jetting units ranging from 1,000 to 6,000 litres. Serving Guwahati and all of Assam.",
   alternates: {

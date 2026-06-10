@@ -1,16 +1,19 @@
 import { BUSINESS, SITE_URL, SERVICE_AREAS } from "@/lib/seo";
 
 /**
- * JSON-LD LocalBusiness structured data for Google rich results.
- * Renders as a <script type="application/ld+json"> tag.
+ * Comprehensive JSON-LD structured data for Google rich results.
+ * Renders multiple schema blocks:
+ * - LocalBusiness + ProfessionalService (dual-typed for local pack)
+ * - Organization (for Knowledge Panel)
+ * - WebSite (for sitelinks search box)
  *
- * Why: Google uses this to populate the Knowledge Panel, Maps listing,
+ * Why: Google uses these to populate the Knowledge Panel, Maps listing,
  * and local pack results for "septic tank cleaning Guwahati" queries.
  */
 export default function LocalBusinessJsonLd() {
-  const jsonLd = {
+  const localBusiness = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": `${SITE_URL}/#business`,
     name: BUSINESS.name,
     legalName: BUSINESS.legalName,
@@ -18,8 +21,9 @@ export default function LocalBusinessJsonLd() {
     url: SITE_URL,
     telephone: BUSINESS.phone,
     priceRange: BUSINESS.priceRange,
-    foundingDate: String(BUSINESS.foundingYear),
-    image: `${SITE_URL}/og-image.png`,
+    foundingDate: BUSINESS.foundingDate,
+    image: `${SITE_URL}/images/logo.png`,
+    logo: `${SITE_URL}/images/logo.png`,
     address: {
       "@type": "PostalAddress",
       streetAddress: BUSINESS.address.street,
@@ -44,8 +48,8 @@ export default function LocalBusinessJsonLd() {
         "Saturday",
         "Sunday",
       ],
-      opens: "00:00",
-      closes: "23:59",
+      opens: "08:00",
+      closes: "19:00",
     },
     areaServed: SERVICE_AREAS.map((area) => ({
       "@type": "City",
@@ -61,7 +65,7 @@ export default function LocalBusinessJsonLd() {
             "@type": "Service",
             name: "Septic Tank Cleaning",
             description:
-              "Professional septic tank cleaning and emptying services in Guwahati using modern suction equipment.",
+              "Professional septic tank cleaning and emptying services in Guwahati using modern vacuum suction equipment.",
           },
         },
         {
@@ -99,15 +103,74 @@ export default function LocalBusinessJsonLd() {
       ratingCount: "500",
       bestRating: "5",
     },
+    potentialAction: {
+      "@type": "CommunicateAction",
+      target: `tel:${BUSINESS.phone}`,
+      name: "Call for Booking",
+    },
     sameAs: [
       `https://wa.me/${BUSINESS.whatsapp}`,
     ],
   };
 
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    name: BUSINESS.name,
+    url: SITE_URL,
+    logo: `${SITE_URL}/images/logo.png`,
+    telephone: BUSINESS.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: BUSINESS.address.street,
+      addressLocality: BUSINESS.address.locality,
+      addressRegion: BUSINESS.address.region,
+      postalCode: BUSINESS.address.postalCode,
+      addressCountry: BUSINESS.address.country,
+    },
+    foundingDate: BUSINESS.foundingDate,
+    sameAs: [
+      `https://wa.me/${BUSINESS.whatsapp}`,
+    ],
+  };
+
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    name: BUSINESS.name,
+    url: SITE_URL,
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/?s={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusiness).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organization).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(website).replace(/</g, "\\u003c"),
+        }}
+      />
+    </>
   );
 }

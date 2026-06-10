@@ -25,7 +25,7 @@ import ContactCTA from "@/components/sections/ContactCTA";
 export const metadata: Metadata = {
   title: "About Us - S.K Enterprise Septic Tank Services",
   description:
-    "Learn about S.K Enterprise, Guwahati's trusted septic tank cleaning company. Established with a mission to provide fast, hygienic, and affordable sanitation services across Assam.",
+    "Learn about S.K Enterprise, Guwahati's trusted septic tank cleaning company in Assam. Established in 2019 with a mission to provide fast, hygienic, and affordable sanitation services across Guwahati and surrounding areas.",
   alternates: {
     canonical: `${SITE_URL}/about`,
   },

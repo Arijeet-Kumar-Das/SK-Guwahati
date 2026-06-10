@@ -2,10 +2,8 @@
 
 import { FadeUp, SlideIn } from "@/components/ui/motion";
 import {
-  AlertCircle,
   CheckCircle2,
   Clock,
-  Loader2,
   MapPin,
   MessageCircle,
   Phone,
@@ -39,15 +37,12 @@ interface FormErrors {
   message?: string;
 }
 
-interface ApiResponse {
-  success: boolean;
-  message: string;
-  errors?: Record<string, string>;
-}
-
-type FormStatus = "idle" | "submitting" | "success" | "error";
+type FormStatus = "idle" | "submitting" | "success";
 
 const PHONE_REGEX = /^(?:\+91|0)?[6-9]\d{9}$/;
+
+/** WhatsApp booking number — form enquiries go here */
+const WHATSAPP_BOOKING_NUMBER = "918005429901";
 
 function validateForm(data: FormData): FormErrors {
   const errors: FormErrors = {};
@@ -108,11 +103,28 @@ function inputClasses(hasError: boolean): string {
   }`;
 }
 
+/**
+ * Build a WhatsApp message URL with the form data.
+ * Opens a new tab/window to WhatsApp with a pre-filled professional message.
+ */
+function buildWhatsAppUrl(data: FormData): string {
+  const message = [
+    "🔧 *New Service Request — S.K Enterprise*",
+    "",
+    `*Name:* ${data.name}`,
+    `*Phone:* ${data.phone}`,
+    `*Location:* ${data.address}`,
+    `*Service Required:* ${data.service}`,
+    `*Message:* ${data.message}`,
+  ].join("\n");
+
+  return `https://wa.me/${WHATSAPP_BOOKING_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
 export default function Contact({ siteSettings }: ContactProps) {
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
-  const [statusMessage, setStatusMessage] = useState("");
 
   function handleChange(
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -129,7 +141,7 @@ export default function Contact({ siteSettings }: ContactProps) {
     }
   }
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const validationErrors = validateForm(formData);
@@ -138,44 +150,21 @@ export default function Contact({ siteSettings }: ContactProps) {
       return;
     }
 
-    setStatus("submitting");
     setErrors({});
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+    // Open WhatsApp with the pre-filled message
+    const whatsappUrl = buildWhatsAppUrl(formData);
+    window.open(whatsappUrl, "_blank");
 
-      const result: ApiResponse = await response.json();
+    // Show success state
+    setStatus("success");
+    setFormData(INITIAL_FORM);
 
-      if (result.success) {
-        setStatus("success");
-        setStatusMessage(result.message);
-        setFormData(INITIAL_FORM);
-
-        setTimeout(() => {
-          setStatus("idle");
-          setStatusMessage("");
-        }, 6000);
-      } else {
-        setStatus("error");
-        setStatusMessage(result.message);
-
-        if (result.errors) {
-          setErrors(result.errors as FormErrors);
-        }
-      }
-    } catch {
-      setStatus("error");
-      setStatusMessage(
-        "Could not connect to server. Please try again or call us directly."
-      );
-    }
+    setTimeout(() => {
+      setStatus("idle");
+    }, 6000);
   }
 
-  const isSubmitting = status === "submitting";
   const whatsapp = siteSettings.whatsapp || "919864074129";
 
   return (
@@ -189,8 +178,8 @@ export default function Contact({ siteSettings }: ContactProps) {
           <p className="section-label justify-center">Get in Touch</p>
           <h2 className="section-title">Book a Professional Cleaning Service</h2>
           <p className="section-subtitle mx-auto">
-            Call, message, or send an enquiry. The operations team will confirm
-            service details and coordinate the right vehicle for your site.
+            Call, message, or fill out the service request form below. Your
+            enquiry will be sent directly via WhatsApp for a fast response.
           </p>
         </FadeUp>
 
@@ -279,22 +268,18 @@ export default function Contact({ siteSettings }: ContactProps) {
                   Request Service
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600">
-                  Share your requirement and we will get back to you with the
-                  next step.
+                  Fill in your details and your enquiry will open directly in
+                  WhatsApp for instant communication.
                 </p>
               </div>
 
               {status === "success" && (
                 <div className="mb-6 flex items-start gap-3 rounded-lg border border-brand-green-600/20 bg-brand-green-600/10 p-4 text-brand-green-700">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
-                  <p className="text-sm font-semibold">{statusMessage}</p>
-                </div>
-              )}
-
-              {status === "error" && (
-                <div className="mb-6 flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
-                  <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
-                  <p className="text-sm font-semibold">{statusMessage}</p>
+                  <p className="text-sm font-semibold">
+                    Your enquiry has been opened in WhatsApp. If WhatsApp did not
+                    open, please call us directly at {siteSettings.phone}.
+                  </p>
                 </div>
               )}
 
@@ -313,7 +298,6 @@ export default function Contact({ siteSettings }: ContactProps) {
                     placeholder="Your name"
                     value={formData.name}
                     onChange={handleChange}
-                    disabled={isSubmitting}
                     className={inputClasses(!!errors.name)}
                     aria-invalid={!!errors.name}
                     aria-describedby={errors.name ? "name-error" : undefined}
@@ -340,7 +324,6 @@ export default function Contact({ siteSettings }: ContactProps) {
                       placeholder="Phone number"
                       value={formData.phone}
                       onChange={handleChange}
-                      disabled={isSubmitting}
                       className={inputClasses(!!errors.phone)}
                       aria-invalid={!!errors.phone}
                       aria-describedby={errors.phone ? "phone-error" : undefined}
@@ -367,7 +350,6 @@ export default function Contact({ siteSettings }: ContactProps) {
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      disabled={isSubmitting}
                       className={inputClasses(!!errors.service)}
                       aria-invalid={!!errors.service}
                       aria-describedby={
@@ -406,7 +388,6 @@ export default function Contact({ siteSettings }: ContactProps) {
                     placeholder="Service address"
                     value={formData.address}
                     onChange={handleChange}
-                    disabled={isSubmitting}
                     className={inputClasses(!!errors.address)}
                     aria-invalid={!!errors.address}
                     aria-describedby={
@@ -437,7 +418,6 @@ export default function Contact({ siteSettings }: ContactProps) {
                     placeholder="Describe your requirement"
                     value={formData.message}
                     onChange={handleChange}
-                    disabled={isSubmitting}
                     className={`${inputClasses(!!errors.message)} resize-y`}
                     aria-invalid={!!errors.message}
                     aria-describedby={
@@ -456,20 +436,10 @@ export default function Contact({ siteSettings }: ContactProps) {
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand-green-600 px-6 py-4 text-base font-bold text-white shadow-lg shadow-brand-green-600/20 transition-all duration-200 hover:bg-brand-green-700 hover:shadow-brand-green-600/25 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand-green-600 px-6 py-4 text-base font-bold text-white shadow-lg shadow-brand-green-600/20 transition-all duration-200 hover:bg-brand-green-700 hover:shadow-brand-green-600/25"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      Sending
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-4 w-4" />
-                      Request Service
-                    </>
-                  )}
+                  <Send className="h-4 w-4" />
+                  Send via WhatsApp
                 </button>
               </form>
             </div>

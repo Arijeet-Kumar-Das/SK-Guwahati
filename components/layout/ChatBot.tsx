@@ -92,6 +92,9 @@ type FlowState =
 const TYPING_DELAY = 450;
 const PHONE_REGEX = /^(?:\+91|0)?[6-9]\d{9}$/;
 
+/** WhatsApp booking number — chatbot enquiries go here */
+const WHATSAPP_BOOKING_NUMBER = "918005429901";
+
 const MAIN_MENU_OPTIONS: QuickOption[] = [
   { label: "Book Service", action: "book", icon: <Wrench size={14} /> },
   { label: "Service Info", action: "services", icon: <Info size={14} /> },
@@ -120,6 +123,19 @@ function backOption(): QuickOption {
   return { label: "Back to Menu", action: "menu", icon: <ArrowLeft size={14} /> };
 }
 
+function buildBookingWhatsAppUrl(lead: LeadData): string {
+  const message = [
+    "🔧 *Service Booking — S.K Enterprise*",
+    "",
+    `*Name:* ${lead.name}`,
+    `*Phone:* ${lead.phone}`,
+    `*Service:* ${lead.service}`,
+    `*Location:* ${lead.location}`,
+  ].join("\n");
+
+  return `https://wa.me/${WHATSAPP_BOOKING_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
 function formatSummary(lead: LeadData): string {
   return [
     "**Enquiry Summary**",
@@ -129,7 +145,7 @@ function formatSummary(lead: LeadData): string {
     `Service: ${lead.service}`,
     `Location: ${lead.location}`,
     "",
-    "Our team will contact you within 30 minutes. For immediate assistance, call or message us on WhatsApp.",
+    "Tap **Send via WhatsApp** below to submit your booking request instantly.",
   ].join("\n");
 }
 
@@ -337,6 +353,20 @@ export default function ChatBot({
         return;
       }
 
+      if (action === "send_booking_whatsapp") {
+        const bookingUrl = buildBookingWhatsAppUrl(lead);
+        window.open(bookingUrl, "_blank");
+        userSay("Sending booking via WhatsApp");
+        await botSay(
+          "Your booking request has been opened in WhatsApp. Our team will confirm your service shortly.",
+          [
+            { label: `Call ${phone}`, action: "call", icon: <Phone size={14} /> },
+            { label: "Start Over", action: "menu", icon: <ArrowLeft size={14} /> },
+          ]
+        );
+        return;
+      }
+
       if (action.startsWith("service_")) {
         const serviceId = action.replace("service_", "");
         const service = services.find((item) => item._id === serviceId);
@@ -523,12 +553,12 @@ export default function ChatBot({
         const updated = { ...lead, location: trimmed };
         setLead(updated);
         await botSay(formatSummary(updated), [
-          { label: `Call ${phone}`, action: "call", icon: <Phone size={14} /> },
           {
-            label: "WhatsApp",
-            action: "whatsapp",
+            label: "Send via WhatsApp",
+            action: `send_booking_whatsapp`,
             icon: <MessageCircle size={14} />,
           },
+          { label: `Call ${phone}`, action: "call", icon: <Phone size={14} /> },
           { label: "Start Over", action: "menu", icon: <ArrowLeft size={14} /> },
         ]);
         setFlow("book_summary");
