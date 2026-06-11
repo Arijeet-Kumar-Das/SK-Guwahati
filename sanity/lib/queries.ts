@@ -7,7 +7,8 @@ export const SITE_SETTINGS_QUERY = `
     workingHours,
     googleMapsUrl,
     heroTitle,
-    heroDescription
+    heroDescription,
+    secondaryPhone,
   }
 `;
 export const SERVICES_QUERY = `

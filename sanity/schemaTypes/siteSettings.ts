@@ -17,6 +17,11 @@ export const siteSettings = defineType({
       title: "Phone Number",
       type: "string",
     }),
+    defineField({
+      name: "secondaryPhone",
+      title: "Secondary Phone Number",
+      type: "string",
+    }),
 
     defineField({
       name: "whatsapp",
@@ -47,10 +52,10 @@ export const siteSettings = defineType({
       type: "string",
     }),
 
-  defineField({
-    name: "googleMapsUrl",
-    title: "Google Maps Embed URL",
-    type: "url",
+    defineField({
+      name: "googleMapsUrl",
+      title: "Google Maps Embed URL",
+      type: "url",
     }),
   ],
 });

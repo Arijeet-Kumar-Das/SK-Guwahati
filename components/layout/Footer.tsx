@@ -14,6 +14,7 @@ interface FooterProps {
     phone: string;
     whatsapp: string;
     address: string;
+    secondaryPhone?: string;
   };
 }
 
@@ -161,6 +162,15 @@ export default function Footer({ siteSettings }: FooterProps) {
                 <Phone size={17} className="mt-0.5 shrink-0 text-brand-green-400" />
                 <span className="text-sm font-medium">{siteSettings.phone}</span>
               </a>
+              {siteSettings.secondaryPhone && (
+              <a
+                href={`tel:${siteSettings.secondaryPhone}`}
+                className="flex items-start gap-3 text-navy-300 transition-colors hover:text-white"
+              >
+                <Phone size={17} className="mt-0.5 shrink-0 text-brand-green-400" />
+                <span className="text-sm font-medium">{siteSettings.secondaryPhone}</span>
+              </a>
+              )}
               <a
                 href={`https://wa.me/${siteSettings.whatsapp}`}
                 target="_blank"

@@ -5,6 +5,7 @@ import { client } from "@/sanity/lib/client";
 export interface SiteSettings {
   companyName: string;
   phone: string;
+  secondaryPhone?: string;
   whatsapp: string;
   address: string;
   workingHours: string;
@@ -23,6 +24,7 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
     `*[_type == "siteSettings"][0]{
       companyName,
       phone,
+      secondaryPhone,
       whatsapp,
       address,
       workingHours,
