@@ -18,6 +18,12 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
+
   title: {
     default:
       "S.K Enterprise - Professional Septic Tank Cleaning in Guwahati | 24/7 Service",
