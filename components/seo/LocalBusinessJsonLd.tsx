@@ -23,7 +23,13 @@ export default function LocalBusinessJsonLd() {
     priceRange: BUSINESS.priceRange,
     foundingDate: BUSINESS.foundingDate,
     image: `${SITE_URL}/images/logo.png`,
-    logo: `${SITE_URL}/images/logo.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/images/logo.png`,
+      width: 512,
+      height: 512,
+      caption: "S.K Enterprise Logo"
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: BUSINESS.address.street,
@@ -119,7 +125,13 @@ export default function LocalBusinessJsonLd() {
     "@id": `${SITE_URL}/#organization`,
     name: BUSINESS.name,
     url: SITE_URL,
-    logo: `${SITE_URL}/images/logo.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/images/logo.png`,
+      width: 512,
+      height: 512,
+      caption: "S.K Enterprise Logo"
+    },
     telephone: BUSINESS.phone,
     address: {
       "@type": "PostalAddress",

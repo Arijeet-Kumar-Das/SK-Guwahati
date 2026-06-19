@@ -65,44 +65,42 @@ export default function Navbar({ phone = "09864074129" }: NavbarProps) {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-50 border-b transition-all duration-300 ${
-          showSolid
-            ? "border-slate-200/80 bg-white/95 shadow-[0_14px_34px_rgba(15,23,42,0.06)] backdrop-blur-md"
-            : "border-white/10 bg-transparent"
-        }`}
+        className={`fixed left-0 right-0 top-0 z-50 border-b transition-all duration-300 ${showSolid
+          ? "border-slate-200/80 bg-white/95 shadow-[0_14px_34px_rgba(15,23,42,0.06)] backdrop-blur-md"
+          : "border-white/10 bg-transparent"
+          }`}
       >
         <div className="section-container">
           <div className="flex h-16 items-center justify-between sm:h-20">
             {/* Logo */}
             <Link href="/" className="group flex items-center gap-2 sm:gap-3 min-w-0">
               <div
-                className={`relative h-9 w-9 shrink-0 overflow-hidden rounded-lg border sm:h-11 sm:w-11 ${
-                  showSolid ? "border-slate-200 bg-white" : "border-white/15 bg-white/10"
-                }`}
+                className={`relative h-10 w-10 shrink-0 overflow-hidden rounded-lg sm:h-12 sm:w-12 bg-white shadow-sm ${showSolid ? "border border-slate-200" : "border border-white/20 shadow-md"
+                  }`}
               >
                 <Image
                   src="/images/logo.png"
                   alt="S.K Enterprise Logo"
                   fill
-                  className="object-contain p-1"
-                  sizes="44px"
+                  className="object-contain p-1.5"
+                  sizes="48px"
                   priority
+                  unoptimized
+                  key="logo-v3-cropped"
                 />
               </div>
 
               <div className="min-w-0">
                 <div
-                  className={`text-base font-extrabold transition-colors duration-300 sm:text-lg ${
-                    showSolid ? "text-navy-950" : "text-white"
-                  }`}
+                  className={`text-base font-extrabold transition-colors duration-300 sm:text-lg ${showSolid ? "text-navy-950" : "text-white"
+                    }`}
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   S.K Enterprise
                 </div>
                 <div
-                  className={`hidden text-[11px] font-semibold uppercase transition-colors duration-300 sm:block ${
-                    showSolid ? "text-slate-500" : "text-navy-200"
-                  }`}
+                  className={`hidden text-[11px] font-semibold uppercase transition-colors duration-300 sm:block ${showSolid ? "text-slate-500" : "text-navy-200"
+                    }`}
                 >
                   Mechanized sanitation services
                 </div>
@@ -120,15 +118,14 @@ export default function Navbar({ phone = "09864074129" }: NavbarProps) {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative rounded-lg px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
-                      showSolid
-                        ? isActive
-                          ? "bg-navy-50 text-navy-950"
-                          : "text-slate-600 hover:bg-navy-50 hover:text-navy-950"
-                        : isActive
-                          ? "bg-white/12 text-white"
-                          : "text-navy-100 hover:bg-white/10 hover:text-white"
-                    }`}
+                    className={`relative rounded-lg px-4 py-2 text-sm font-semibold transition-colors duration-200 ${showSolid
+                      ? isActive
+                        ? "bg-navy-50 text-navy-950"
+                        : "text-slate-600 hover:bg-navy-50 hover:text-navy-950"
+                      : isActive
+                        ? "bg-white/12 text-white"
+                        : "text-navy-100 hover:bg-white/10 hover:text-white"
+                      }`}
                   >
                     {link.label}
                     {isActive && (
@@ -158,11 +155,10 @@ export default function Navbar({ phone = "09864074129" }: NavbarProps) {
             <button
               type="button"
               onClick={toggleMobile}
-              className={`relative z-[60] flex h-11 w-11 items-center justify-center rounded-lg transition-colors lg:hidden ${
-                showSolid
-                  ? "text-navy-950 hover:bg-navy-50"
-                  : "text-white hover:bg-white/10"
-              }`}
+              className={`relative z-[60] flex h-11 w-11 items-center justify-center rounded-lg transition-colors lg:hidden ${showSolid
+                ? "text-navy-950 hover:bg-navy-50"
+                : "text-white hover:bg-white/10"
+                }`}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
             >
@@ -226,11 +222,10 @@ export default function Navbar({ phone = "09864074129" }: NavbarProps) {
                       key={link.href}
                       href={link.href}
                       onClick={closeMobile}
-                      className={`flex items-center justify-between rounded-lg px-4 py-3.5 text-base font-semibold transition-colors ${
-                        isActive
-                          ? "bg-navy-50 text-navy-950"
-                          : "text-slate-700 hover:bg-navy-50 hover:text-navy-950"
-                      }`}
+                      className={`flex items-center justify-between rounded-lg px-4 py-3.5 text-base font-semibold transition-colors ${isActive
+                        ? "bg-navy-50 text-navy-950"
+                        : "text-slate-700 hover:bg-navy-50 hover:text-navy-950"
+                        }`}
                     >
                       {link.label}
                       {isActive && (

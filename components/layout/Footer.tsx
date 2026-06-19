@@ -89,6 +89,8 @@ export default function Footer({ siteSettings }: FooterProps) {
                   fill
                   className="object-contain p-1"
                   sizes="44px"
+                  unoptimized
+                  key="logo-v3-cropped"
                 />
               </div>
               <div>
@@ -163,13 +165,13 @@ export default function Footer({ siteSettings }: FooterProps) {
                 <span className="text-sm font-medium">{siteSettings.phone}</span>
               </a>
               {siteSettings.secondaryPhone && (
-              <a
-                href={`tel:${siteSettings.secondaryPhone}`}
-                className="flex items-start gap-3 text-navy-300 transition-colors hover:text-white"
-              >
-                <Phone size={17} className="mt-0.5 shrink-0 text-brand-green-400" />
-                <span className="text-sm font-medium">{siteSettings.secondaryPhone}</span>
-              </a>
+                <a
+                  href={`tel:${siteSettings.secondaryPhone}`}
+                  className="flex items-start gap-3 text-navy-300 transition-colors hover:text-white"
+                >
+                  <Phone size={17} className="mt-0.5 shrink-0 text-brand-green-400" />
+                  <span className="text-sm font-medium">{siteSettings.secondaryPhone}</span>
+                </a>
               )}
               <a
                 href={`https://wa.me/${siteSettings.whatsapp}`}
