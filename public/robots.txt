@@ -1,0 +1,10 @@
+# S.K Enterprise - Septic Tank Cleaning Guwahati
+# robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /studio/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://skenterpriseguwahati.com/sitemap.xml

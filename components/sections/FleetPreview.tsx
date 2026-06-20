@@ -9,6 +9,7 @@ import Link from "next/link";
 
 interface FleetItem {
   _id: string;
+  fleetNumber: string;
   name: string;
   capacity: string;
   description: string;
@@ -98,7 +99,7 @@ export default function FleetPreview({ items }: FleetPreviewProps) {
                       Fleet unit
                     </span>
                     <span className="text-sm font-bold text-navy-950">
-                      {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                      {vehicle.fleetNumber}
                     </span>
                   </div>
                 </div>

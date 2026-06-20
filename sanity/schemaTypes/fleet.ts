@@ -7,6 +7,14 @@ export const fleet = defineType({
 
   fields: [
     defineField({
+      name: "fleetNumber",
+      title: "Fleet Number",
+      type: "string",
+      description: "Custom fleet number (e.g., AS-01, GHY-203, etc.)",
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
       name: "name",
       title: "Vehicle Name",
       type: "string",

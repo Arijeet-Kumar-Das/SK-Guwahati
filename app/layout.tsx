@@ -66,9 +66,10 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/logo.png",
-        width: 1200,
-        height: 630,
+        width: 512,
+        height: 512,
         alt: "S.K Enterprise - Septic Tank Cleaning Services in Guwahati",
+        type: "image/png",
       },
     ],
   },
@@ -114,6 +115,10 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/images/logo.png" />
+
+        {/* Google-specific logo meta tags for search results */}
+        <meta property="og:logo" content="https://skenterpriseguwahati.com/images/logo.png" />
+        <link rel="image_src" href="https://skenterpriseguwahati.com/images/logo.png" />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-slate-800">
         {children}

@@ -8,6 +8,7 @@ import Image from "next/image";
 
 interface FleetItem {
   _id: string;
+  fleetNumber: string;
   name: string;
   capacity: string;
   description: string;
@@ -71,10 +72,10 @@ export default function Fleet({ items }: FleetProps) {
 
                   <div className="mt-6 flex items-center justify-between border-t border-slate-200 pt-4">
                     <span className="text-sm font-medium text-slate-500">
-                      Specialized fleet unit
+                      Fleet unit
                     </span>
                     <span className="text-sm font-bold text-navy-950">
-                      {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                      {vehicle.fleetNumber}
                     </span>
                   </div>
                 </div>

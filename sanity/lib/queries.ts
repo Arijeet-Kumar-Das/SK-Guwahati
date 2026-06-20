@@ -29,6 +29,7 @@ export const AREAS_QUERY = `
 export const FLEET_QUERY = `
   *[_type == "fleet"] | order(_createdAt asc){
     _id,
+    fleetNumber,
     name,
     capacity,
     description,
