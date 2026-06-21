@@ -21,12 +21,10 @@ export const metadata: Metadata = {
   // Explicit favicon and icon configuration
   icons: {
     icon: [
-      { url: "/images/logo.png", type: "image/png", sizes: "32x32" },
-      { url: "/images/logo.png", type: "image/png", sizes: "16x16" },
-      { url: "/images/logo.png", type: "image/png", sizes: "192x192" },
-      { url: "/images/logo.png", type: "image/png", sizes: "512x512" },
+      { url: "/images/logo.png", type: "image/png", sizes: "any" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
-    shortcut: "/images/logo.png",
+    shortcut: ["/favicon.ico"],
     apple: [
       { url: "/images/logo.png", sizes: "180x180", type: "image/png" },
     ],
@@ -107,11 +105,17 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <head>
-        {/* Additional favicon links for better browser support */}
-        <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png" />
+        {/* Primary favicon - most important */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/images/logo.png" type="image/png" />
+
+        {/* Apple Touch Icon */}
+        <link rel="apple-touch-icon" href="/images/logo.png" />
+
+        {/* Manifest */}
         <link rel="manifest" href="/manifest.json" />
+
+        {/* Theme colors */}
         <meta name="theme-color" content="#ffffff" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/images/logo.png" />
